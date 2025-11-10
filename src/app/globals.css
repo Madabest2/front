@@ -45,13 +45,15 @@
 :root {
   --radius: 0.625rem;
 
-  /* Palette Madabest - Couleurs personnalisées */
-  --madabest-primary: oklch(0.45 0.25 260); /* Bleu/Violet principal */
-  --madabest-secondary: oklch(0.65 0.2 200); /* Bleu secondaire */
-  --madabest-accent: oklch(0.75 0.15 150); /* Accent cyan/turquoise */
-  --madabest-success: oklch(0.65 0.18 145); /* Vert succès */
-  --madabest-warning: oklch(0.75 0.2 80); /* Jaune/Orange attention */
-  --madabest-danger: oklch(0.6 0.24 25); /* Rouge danger */
+  /* Palette Madabest - Couleurs personnalisées selon le brief */
+  --madabest-primary: #e85d3f; /* Orange coral principal */
+  --madabest-primary-dark: #d64a2e; /* Orange foncé */
+  --madabest-primary-light: #ff7a5c; /* Orange clair */
+  --madabest-cream: #f5f1e8; /* Crème principal */
+  --madabest-cream-light: #fff9f4; /* Crème clair */
+  --madabest-cream-dark: #e8dcc8; /* Crème foncé */
+  --madabest-dark: #1a1a1a; /* Noir principal */
+  --madabest-dark-light: #2d2d2d; /* Noir clair */
 
   /* Design System variables */
   --background: oklch(1 0 0);
@@ -62,21 +64,21 @@
   --popover-foreground: oklch(0.145 0 0);
   --primary: var(--madabest-primary);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: var(--madabest-secondary);
-  --secondary-foreground: oklch(0.985 0 0);
+  --secondary: var(--madabest-cream);
+  --secondary-foreground: var(--madabest-dark);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: var(--madabest-accent);
+  --accent: var(--madabest-primary);
   --accent-foreground: oklch(0.985 0 0);
-  --destructive: var(--madabest-danger);
+  --destructive: oklch(0.6 0.24 25);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: var(--madabest-primary);
   --chart-1: var(--madabest-primary);
-  --chart-2: var(--madabest-secondary);
-  --chart-3: var(--madabest-accent);
-  --chart-4: var(--madabest-warning);
-  --chart-5: var(--madabest-success);
+  --chart-2: var(--madabest-cream);
+  --chart-3: var(--madabest-dark);
+  --chart-4: var(--madabest-primary-light);
+  --chart-5: var(--madabest-primary-dark);
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: var(--madabest-primary);
@@ -89,9 +91,14 @@
 
 .dark {
   /* Palette Madabest - Mode sombre */
-  --madabest-primary: oklch(0.6 0.25 260);
-  --madabest-secondary: oklch(0.55 0.2 200);
-  --madabest-accent: oklch(0.65 0.15 150);
+  --madabest-primary: #ff7a5c; /* Orange plus clair pour dark mode */
+  --madabest-primary-dark: #e85d3f;
+  --madabest-primary-light: #ffa085;
+  --madabest-cream: #2d2d2d;
+  --madabest-cream-light: #3a3a3a;
+  --madabest-cream-dark: #1a1a1a;
+  --madabest-dark: #f5f1e8;
+  --madabest-dark-light: #ffffff;
 
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -101,21 +108,21 @@
   --popover-foreground: oklch(0.985 0 0);
   --primary: var(--madabest-primary);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: var(--madabest-secondary);
+  --secondary: var(--madabest-cream);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: var(--madabest-accent);
+  --accent: var(--madabest-primary);
   --accent-foreground: oklch(0.985 0 0);
-  --destructive: var(--madabest-danger);
+  --destructive: oklch(0.6 0.24 25);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: var(--madabest-primary);
   --chart-1: var(--madabest-primary);
-  --chart-2: var(--madabest-secondary);
-  --chart-3: var(--madabest-accent);
-  --chart-4: var(--madabest-warning);
-  --chart-5: var(--madabest-success);
+  --chart-2: var(--madabest-cream);
+  --chart-3: var(--madabest-dark);
+  --chart-4: var(--madabest-primary-light);
+  --chart-5: var(--madabest-primary-dark);
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: var(--madabest-primary);
@@ -132,5 +139,93 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family:
+      "Inter",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family:
+      "Poppins",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
+    font-weight: 700;
+  }
+}
+
+@layer utilities {
+  /* Couleurs MADABEST personnalisées */
+  .text-primary-madabest {
+    color: var(--madabest-primary);
+  }
+  .bg-primary-madabest {
+    background-color: var(--madabest-primary);
+  }
+  .text-primary-dark-madabest {
+    color: var(--madabest-primary-dark);
+  }
+  .bg-primary-dark-madabest {
+    background-color: var(--madabest-primary-dark);
+  }
+  .text-primary-light-madabest {
+    color: var(--madabest-primary-light);
+  }
+  .bg-primary-light-madabest {
+    background-color: var(--madabest-primary-light);
+  }
+  .text-cream-madabest {
+    color: var(--madabest-cream);
+  }
+  .bg-cream-madabest {
+    background-color: var(--madabest-cream);
+  }
+  .text-cream-light-madabest {
+    color: var(--madabest-cream-light);
+  }
+  .bg-cream-light-madabest {
+    background-color: var(--madabest-cream-light);
+  }
+  .text-cream-dark-madabest {
+    color: var(--madabest-cream-dark);
+  }
+  .bg-cream-dark-madabest {
+    background-color: var(--madabest-cream-dark);
+  }
+  .text-dark-madabest {
+    color: var(--madabest-dark);
+  }
+  .bg-dark-madabest {
+    background-color: var(--madabest-dark);
+  }
+  .text-dark-light-madabest {
+    color: var(--madabest-dark-light);
+  }
+  .bg-dark-light-madabest {
+    background-color: var(--madabest-dark-light);
+  }
+
+  /* Polices personnalisées */
+  .font-heading {
+    font-family:
+      "Poppins",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
+  }
+  .font-script {
+    font-family: "Parisienne", cursive;
   }
 }

@@ -3,5 +3,11 @@
  * Re-export UI components from ui/ folder
  */
 
-// Export UI components here when added via shadcn/ui
-export {};
+// UI Components (Shadcn/ui)
+export * from "./ui/button";
+export * from "./ui/card";
+export * from "./ui/dialog";
+export * from "./ui/input";
+
+// Custom Components
+export * from "./custom";
