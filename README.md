@@ -234,3 +234,50 @@ NEXT_PUBLIC_API_URL=http://localhost:3000/api
 
 **Version**: 0.1.0  
 **Dernière mise à jour**: November 10, 2025
+
+## 🚢 Déploiement continu sur Vercel
+
+Voici comment activer le déploiement continu (CI/CD) sur Vercel pour ce projet Next.js:
+
+### 1) Connecter le repo à Vercel (Git Integration)
+
+- Créez un compte sur https://vercel.com et installez l'application GitHub «Vercel» sur votre organisation.
+- Dans Vercel: New Project → Import Git Repository → sélectionnez «Madabest2/front».
+- Racine du projet: «/» (le repo n'est pas monorepo).
+- Vercel détectera automatiquement Next.js et utilisera:
+  - Install Command: npm ci (ou npm install)
+  - Build Command: npm run build
+  - Dev Command: npm run dev
+  - Output: Next.js (automatique)
+
+### 2) Branches et déploiements
+
+- Production Branch: «main» → chaque push sur main déclenche un déploiement Production.
+- Pull Requests: chaque PR crée un Preview Deployment avec une URL unique.
+- Vous verrez un commentaire automatique sur la PR avec le lien de Preview si l'app Git Vercel est installée.
+
+### 3) Variables d'environnement
+
+- Copiez les variables de `.env.example` dans Vercel → Project Settings → Environment Variables.
+- Renseignez au minimum: `NEXT_PUBLIC_API_URL` (valeur de production).
+- Définissez les valeurs séparément pour «Production» et «Preview» si nécessaire.
+- Redéployez ensuite la Production (Deploy → Redeploy) pour appliquer.
+
+### 4) Qualité avant déploiement (CI)
+
+- Un workflow GitHub Actions est ajouté dans `.github/workflows/ci.yml`:
+  - Installe les dépendances (`npm ci`)
+  - Exécute `npm run lint`, `npm run type-check`, et `npm run build`
+- Astuce: activez la protection de branche «main» côté GitHub pour «Require status checks to pass before merging» afin de bloquer les merges si la CI échoue.
+
+### 5) Optionnel: Deploy Hooks et intégrations externes
+
+- Dans Vercel → Project Settings → Deploy Hooks, créez un hook «Production».
+- Utilisez l'URL générée pour déclencher un redeploy depuis un CMS, un cron, ou un backend.
+
+### 6) Domaines et routage
+
+- Ajoutez votre domaine dans Vercel → Domains et assignez-le à la Production.
+- Les Previews gardent des URLs temporaires automatiquement.
+
+Une fois ces étapes faites, chaque push déclenchera automatiquement un build et un déploiement sur Vercel. 🎉
