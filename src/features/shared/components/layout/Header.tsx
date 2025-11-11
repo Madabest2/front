@@ -1,114 +1,181 @@
 "use client";
 
 import { Button } from "@/features/design-system/components/ui/button";
-import { cn } from "@/lib/utils";
-import { NAV_LINKS, ROUTES } from "@/shared/config/routes";
-import { appConfig } from "@/shared/constants/appConfig";
-import { Menu, User, X } from "lucide-react";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/features/design-system/components/ui/dialog";
+import { Input } from "@/features/design-system/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/features/design-system/components/ui/select";
+import { Menu, Search, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { useEffect, useState } from "react";
 
 export function Header() {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [isScrolled, setIsScrolled] = React.useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [lang, setLang] = useState("fr");
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const navLinks = [
+    { label: "Accueil", href: "/" },
+    { label: "À propos", href: "/about" },
+    { label: "Nos activités", href: "/activities" },
+    { label: "Nos services", href: "/services" },
+    { label: "Conditions & modalités", href: "/terms" },
+    { label: "Contact", href: "/contact" },
+  ];
+
   return (
     <header
-      className={cn(
-        "fixed top-0 z-50 w-full transition-all duration-300",
-        isScrolled ? "bg-white shadow-md" : "bg-white/90 backdrop-blur-sm"
-      )}
+      className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
+        isScrolled ? "bg-black/60 backdrop-blur-lg" : "bg-transparent"
+      } border-b border-white/10`}
     >
-      <div className="container mx-auto px-4">
-        <div className="flex h-20 items-center justify-between">
+      <div className="container lg:px-8">
+        {/* Navigation principale */}
+        <nav className="flex h-20 w-full items-center justify-between lg:h-24">
           {/* Logo */}
-          <Link href={ROUTES.HOME} className="flex items-center space-x-2">
-            <img src="/images/logo-madabest.svg" alt={appConfig.name} className="h-12 w-auto" />
-            <span className="font-heading text-primary-madabest text-2xl font-bold">
-              {appConfig.name}
-            </span>
+          <Link
+            href="/"
+            className="shrink-0 transform transition-transform duration-200 hover:scale-105"
+          >
+            <Image src="/logoorange.png" alt="Madabest" width={341} height={153} />
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden items-center space-x-8 lg:flex">
-            {NAV_LINKS.MAIN.map((link) => (
+          {/* Navigation Desktop */}
+          <div className="hidden items-center gap-8 lg:flex">
+            {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-dark-madabest hover:text-primary-madabest text-sm font-medium transition-colors"
+                className="group relative text-base font-medium text-white transition-colors duration-200 hover:text-[#E2531F]"
               >
                 {link.label}
+                <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-[#E2531F] transition-all duration-200 group-hover:w-full"></span>
               </Link>
             ))}
-          </nav>
-
-          {/* Actions */}
-          <div className="hidden items-center space-x-4 lg:flex">
-            <Link href={ROUTES.AUTH.LOGIN}>
-              <Button variant="ghost" size="sm">
-                <User className="mr-2 h-4 w-4" />
-                Connexion
-              </Button>
-            </Link>
-            <Link href={ROUTES.AUTH.REGISTER}>
-              <Button size="sm" className="bg-primary-madabest hover:bg-primary-dark-madabest">
-                S&apos;inscrire
-              </Button>
-            </Link>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button className="lg:hidden" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
-            {isOpen ? (
-              <X className="text-dark-madabest h-6 w-6" />
-            ) : (
-              <Menu className="text-dark-madabest h-6 w-6" />
-            )}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {isOpen && (
-          <div className="border-t border-gray-200 py-4 lg:hidden">
-            <nav className="flex flex-col space-y-4">
-              {NAV_LINKS.MAIN.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-dark-madabest hover:text-primary-madabest text-sm font-medium transition-colors"
-                  onClick={() => setIsOpen(false)}
+          {/* Actions Desktop */}
+          <div className="hidden items-center gap-4 lg:flex">
+            {/* Recherche (Dialog) */}
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button
+                  size="icon"
+                  variant="outline"
+                  aria-label="Rechercher"
+                  className="border-white/20 bg-transparent text-white/90 hover:bg-white/10"
                 >
-                  {link.label}
-                </Link>
-              ))}
-              <div className="flex flex-col space-y-2 border-t border-gray-200 pt-4">
-                <Link href={ROUTES.AUTH.LOGIN} onClick={() => setIsOpen(false)}>
-                  <Button variant="ghost" size="sm" className="w-full">
-                    Connexion
-                  </Button>
-                </Link>
-                <Link href={ROUTES.AUTH.REGISTER} onClick={() => setIsOpen(false)}>
-                  <Button
-                    size="sm"
-                    className="bg-primary-madabest hover:bg-primary-dark-madabest w-full"
-                  >
-                    S&apos;inscrire
-                  </Button>
-                </Link>
-              </div>
-            </nav>
+                  <Search className="h-5 w-5" />
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl border-white/20 bg-black/70 backdrop-blur-lg">
+                <DialogHeader>
+                  <DialogTitle className="text-white">Rechercher une destination</DialogTitle>
+                </DialogHeader>
+                <div className="relative">
+                  <Search className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 transform text-white/60" />
+                  <Input
+                    type="text"
+                    placeholder="Rechercher une destination..."
+                    className="w-full rounded-lg border-white/20 bg-white/10 py-3 pr-4 pl-12 text-white placeholder:text-white/60 focus:border-white/40"
+                  />
+                </div>
+              </DialogContent>
+            </Dialog>
+
+            {/* Sélecteur de langue (Select) */}
+            <Select value={lang} onValueChange={setLang}>
+              <SelectTrigger className="border-white/40 text-white">
+                <SelectValue placeholder="Langue" />
+              </SelectTrigger>
+              <SelectContent className="border-white/20 bg-black/90 text-white">
+                <SelectItem value="fr">🇫🇷 FR - Français</SelectItem>
+                <SelectItem value="en">🇬🇧 EN - English</SelectItem>
+              </SelectContent>
+            </Select>
+
+            {/* CTA Button */}
+            <Button
+              size="lg"
+              className="rounded bg-[#E2531F] px-6 text-base font-medium text-white shadow-lg shadow-orange-500/30 hover:bg-[#d64a2e]"
+            >
+              Commencer votre réservation
+            </Button>
           </div>
-        )}
+
+          {/* Menu Mobile (Dialog) */}
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button
+                size="icon"
+                variant="ghost"
+                aria-label="Menu"
+                className="text-white lg:hidden"
+              >
+                <Menu className="h-6 w-6" />
+              </Button>
+            </DialogTrigger>
+            <DialogContent
+              className="inset-0 top-0 left-0 h-dvh w-full translate-x-0 translate-y-0 rounded-none border-0 bg-black/90 p-6 text-white sm:max-w-none"
+              showCloseButton={false}
+            >
+              <div className="flex items-center justify-between">
+                <Link href="/" className="shrink-0">
+                  <Image src="/logoorange.png" alt="Madabest" width={112} height={32} />
+                </Link>
+                <DialogClose asChild>
+                  <Button size="icon" variant="ghost" aria-label="Fermer">
+                    <X className="h-6 w-6" />
+                  </Button>
+                </DialogClose>
+              </div>
+              <div className="mt-6 flex flex-col gap-4">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="py-2 text-base font-medium text-white transition-colors hover:text-[#E2531F]"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+                <div className="border-t border-white/20 pt-4">
+                  <Button
+                    size="lg"
+                    className="w-full bg-[#E2531F] font-medium text-white hover:bg-[#d64a2e]"
+                  >
+                    Commencer votre réservation
+                  </Button>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
+        </nav>
+        {/* The old inline search bar and mobile dropdown are replaced by shadcn Dialogs above */}
       </div>
+
+      {/* Ligne de séparation animée */}
+      <div className="h-0.5 bg-linear-to-r from-transparent via-[#E2531F] to-transparent" />
     </header>
   );
 }
