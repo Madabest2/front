@@ -1,128 +1,159 @@
 "use client";
 
 import { Button } from "@/features/design-system/components/ui/button";
-import { Card } from "@/features/design-system/components/ui/card";
-import type { Service } from "@/types/homepage";
-import { Car, Hotel, Map, MapPin } from "lucide-react";
+import { Car, Hotel, Map, Navigation } from "lucide-react";
+import Image from "next/image";
 
-const services: Service[] = [
+const services = [
   {
     id: "1",
     title: "Excursions",
-    description: "Découvrez les merveilles de Madagascar",
-    icon: "directions",
+    icon: Navigation,
   },
   {
     id: "2",
     title: "Circuits sur mesure",
-    description: "Voyages personnalisés selon vos envies",
-    icon: "map",
+    icon: Map,
   },
   {
     id: "3",
     title: "Location de voiture",
-    description: "Véhicules confortables avec chauffeur",
-    icon: "car",
+    icon: Car,
   },
   {
     id: "4",
     title: "Réservation d'hôtels",
-    description: "Hébergements sélectionnés avec soin",
-    icon: "hotel",
+    icon: Hotel,
   },
 ];
 
 export function AboutSection() {
-  const getIcon = (iconName: string) => {
-    switch (iconName) {
-      case "map":
-        return Map;
-      case "car":
-        return Car;
-      case "hotel":
-        return Hotel;
-      default:
-        return MapPin;
-    }
-  };
-
   return (
-    <section className="relative bg-black py-20 lg:py-32">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-          {/* Colonne gauche - Polaroids */}
-          <div className="relative h-[400px] lg:h-[500px]">
-            {/* Photo 1 - Rotation gauche */}
-            <div className="absolute top-0 left-0 w-48 -rotate-[7deg] transform cursor-pointer transition-transform duration-300 hover:rotate-0 lg:w-56">
-              <Card className="bg-white p-2 shadow-2xl">
-                <div className="aspect-square rounded bg-gray-700" />
-              </Card>
-            </div>
+    <section className="relative bg-black lg:py-32">
+      {/* White decoration - Position from Figma */}
+      <div className="absolute -top-12 left-30 h-[198px] w-[441px] opacity-100">
+        <Image
+          src="/logoblanc.png"
+          alt="Madabest"
+          width={441}
+          height={198}
+          className="h-full w-full object-contain"
+        />
+      </div>
 
-            {/* Photo 2 - Rotation droite */}
-            <div className="absolute top-8 right-16 z-10 w-48 rotate-[11deg] transform cursor-pointer transition-transform duration-300 hover:rotate-0 lg:right-24 lg:w-56">
-              <Card className="bg-white p-2 shadow-2xl">
-                <div className="aspect-square rounded bg-gray-600" />
-              </Card>
-            </div>
-
-            {/* Photo 3 - Avant plan */}
-            <div className="absolute right-0 bottom-16 z-20 w-48 transform cursor-pointer transition-transform duration-300 hover:scale-105 lg:w-56">
-              <Card className="bg-white p-2 shadow-2xl">
-                <div className="aspect-square rounded bg-gray-800" />
-              </Card>
-            </div>
-
-            {/* Photo 4 - Rotation gauche forte */}
-            <div className="absolute bottom-0 left-4 w-48 -rotate-[26deg] transform cursor-pointer transition-transform duration-300 hover:rotate-[-20deg] lg:w-56">
-              <Card className="bg-white p-2 shadow-2xl">
-                <div className="aspect-square rounded bg-gray-500" />
-              </Card>
-            </div>
-          </div>
-
-          {/* Colonne droite - Texte et services */}
-          <div className="space-y-10">
-            {/* Titre section */}
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-20">
+          {/* Left Column - About Text and Polaroids */}
+          <div className="space-y-8">
+            {/* About Text */}
             <div className="space-y-6">
-              <h3 className="font-['Kaushan_Script',cursive] text-2xl text-[#E2531F] italic lg:text-3xl">
-                Prêt à vivre l&apos;aventure ?
-              </h3>
-
-              <h2 className="text-3xl font-semibold text-white lg:text-4xl">
-                Tout pour organiser votre séjour à Madagascar :
-              </h2>
-
-              <p className="text-lg leading-relaxed text-white lg:text-xl">
-                <span className="font-bold">MADABEST</span> est une Destination Management Company
-                et une agence de voyages spécialisée dans l&apos;organisation de circuits à
-                Madagascar. Nous proposons des voyages sur mesure et expérientiels, adaptés à vos
-                envies. Passionnée de découvertes et profondément attachée à Madagascar, notre
-                équipe souhaite partager cette passion avec vous et rendre votre voyage inoubliable.
+              <p className="text-[20px] leading-[29px] text-white">
+                <strong>MADABEST</strong> est une Destination Management Company et une agence de
+                voyages spécialisée dans l&apos;organisation de circuits à Madagascar. Nous
+                proposons des voyages sur mesure et expérientiels, adaptés à vos envies. Passionnée
+                de découvertes et profondément attachée à Madagascar, notre équipe souhaite partager
+                cette passion avec vous et rendre votre voyage inoubliable.
               </p>
 
               <Button
                 variant="link"
-                className="h-auto p-0 text-xl font-semibold text-[#E2531F] underline hover:text-[#d64a2e]"
+                className="h-auto p-0 text-[20px] leading-[29px] font-semibold text-[#E2531F] underline hover:text-[#d64a2e]"
               >
                 En savoir plus
               </Button>
             </div>
 
-            {/* Services Grid */}
+            {/* Polaroids - Exact positions from Figma */}
+            <div className="relative h-[341px] w-full">
+              {/* Photo 1 - Position: left: 75.87px, top: 1249px, rotation: -7.48deg */}
+              <div
+                className="absolute top-0 left-[55.87px] h-[210px] w-[190px] transform"
+                style={{ transform: "rotate(-7.48deg)" }}
+              >
+                <div className="relative h-full w-full rounded-[5px] border-2 border-white bg-white p-2 shadow-[-5px_4px_4px_rgba(0,0,0,0.25)]">
+                  <Image
+                    src="/polaroid/tsingy.jpg"
+                    alt="Madabest"
+                    width={441}
+                    height={198}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              </div>
+
+              {/* Photo 2 - Position: left: 224.67px, top: 1258.06px, rotation: 10.54deg */}
+              <div
+                className="absolute top-[9px] left-[148.8px] h-[210px] w-[190px] transform"
+                style={{ transform: "rotate(10.54deg)" }}
+              >
+                <div className="relative h-full w-full rounded-[5px] border-2 border-white bg-white p-2 shadow-[5px_4px_4px_rgba(0,0,0,0.25)]">
+                  <Image
+                    src="/polaroid/baobab.jpg"
+                    alt="Madabest"
+                    width={441}
+                    height={198}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              </div>
+
+              {/* Photo 3 - Position: left: 364.69px, top: 1251.54px */}
+              <div className="absolute top-0.5 left-[288.82px] h-[210px] w-[190px]">
+                <div className="relative h-full w-full rounded-[5px] border-2 border-white bg-white p-2 shadow-[-4px_4px_4px_rgba(0,0,0,0.25)]">
+                  <Image
+                    src="/polaroid/nosybe.jpg"
+                    alt="Madabest"
+                    width={441}
+                    height={198}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              </div>
+
+              {/* Photo 4 - Position: left: 70px, top: 1317.48px, rotation: -26.18deg */}
+              <div
+                className="absolute top-[68px] left-0 h-[210px] w-[190px] transform"
+                style={{ transform: "rotate(-26.18deg)" }}
+              >
+                <div className="relative h-full w-full rounded-[5px] border-2 border-white bg-white p-2 shadow-[3px_7px_4px_rgba(0,0,0,0.25)]">
+                  <Image
+                    src="/polaroid/ricefield.jpg"
+                    alt="Madabest"
+                    width={441}
+                    height={198}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column - Services */}
+          <div className="space-y-8">
+            {/* Title */}
             <div className="space-y-4">
+              <h3 className="text-[40px] leading-[58px] font-(--font-kaushan-script) text-[#E2531F]">
+                Prêt à vivre l&apos;aventure ?
+              </h3>
+              <h2 className="text-[20px] leading-[29px] font-semibold text-white">
+                Tout pour organiser votre séjour à Madagascar :
+              </h2>
+            </div>
+
+            {/* Services List */}
+            <div className="space-y-[25px]">
               {services.map((service) => {
-                const Icon = getIcon(service.icon);
+                const Icon = service.icon;
                 return (
-                  <div key={service.id} className="group flex cursor-pointer items-center gap-4">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#E2531F] transition-transform duration-200 group-hover:scale-110">
+                  <div key={service.id} className="flex items-center gap-4">
+                    {/* Icon Box - 55x50px with orange background */}
+                    <div className="flex h-[50px] w-[55px] shrink-0 items-center justify-center rounded-[5px] bg-[#E2531F]">
                       <Icon className="h-8 w-8 text-white" />
                     </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-white transition-colors group-hover:text-[#E2531F]">
-                        {service.title}
-                      </h4>
-                    </div>
+                    {/* Service Title */}
+                    <h4 className="text-[16px] leading-[23px] font-semibold text-white">
+                      {service.title}
+                    </h4>
                   </div>
                 );
               })}
@@ -131,17 +162,12 @@ export function AboutSection() {
             {/* CTA Button */}
             <Button
               size="lg"
-              className="bg-[#E2531F] px-8 text-base font-medium text-white shadow-lg shadow-orange-500/30 hover:bg-[#d64a2e]"
+              className="h-[38px] rounded bg-[#E2531F] px-[15px] text-[16px] leading-[23px] font-medium text-white hover:bg-[#d64a2e]"
             >
               Commencer votre réservation
             </Button>
           </div>
         </div>
-      </div>
-
-      {/* Décoration - Logo blanc semi-transparent */}
-      <div className="absolute top-0 left-0 h-48 w-96 opacity-10">
-        <div className="h-full w-full rounded-br-[100px] bg-white" />
       </div>
     </section>
   );

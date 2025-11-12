@@ -45,14 +45,14 @@
 :root {
   --radius: 0.625rem;
 
-  /* Palette Madabest - Couleurs personnalisées selon le brief */
-  --madabest-primary: #e85d3f; /* Orange coral principal */
+  /* Palette Madabest - Couleurs exactes du Figma */
+  --madabest-primary: #e2531f; /* Orange principal exact Figma */
   --madabest-primary-dark: #d64a2e; /* Orange foncé */
-  --madabest-primary-light: #ff7a5c; /* Orange clair */
-  --madabest-cream: #f5f1e8; /* Crème principal */
+  --madabest-primary-light: #ffc4af; /* Orange clair */
+  --madabest-cream: #fff6e4; /* Crème principal exact Figma */
   --madabest-cream-light: #fff9f4; /* Crème clair */
   --madabest-cream-dark: #e8dcc8; /* Crème foncé */
-  --madabest-dark: #1a1a1a; /* Noir principal */
+  --madabest-dark: #000000; /* Noir principal */
   --madabest-dark-light: #2d2d2d; /* Noir clair */
 
   /* Design System variables */

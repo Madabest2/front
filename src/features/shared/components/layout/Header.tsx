@@ -3,7 +3,6 @@
 import { Button } from "@/features/design-system/components/ui/button";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -17,14 +16,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/features/design-system/components/ui/select";
-import { Menu, Search, X } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/features/design-system/components/ui/sheet";
+import { Menu, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [lang, setLang] = useState("fr");
+  const pathname = usePathname();
+  const lineRef = useRef<HTMLDivElement | null>(null);
+  const activeLinkRef = useRef<HTMLAnchorElement | null>(null);
+  const [indicatorStyle, setIndicatorStyle] = useState<{ left: number; width: number }>({
+    left: 0,
+    width: 0,
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,6 +41,29 @@ export function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Position the orange indicator on the long white line under the active nav link
+  useEffect(() => {
+    const updateIndicator = () => {
+      const line = lineRef.current;
+      const active = activeLinkRef.current;
+      if (!line || !active) return;
+      const lineRect = line.getBoundingClientRect();
+      const activeRect = active.getBoundingClientRect();
+      setIndicatorStyle({
+        left: Math.max(0, activeRect.left - lineRect.left),
+        width: Math.max(0, activeRect.width),
+      });
+    };
+
+    updateIndicator();
+    window.addEventListener("resize", updateIndicator);
+    window.addEventListener("scroll", updateIndicator, { passive: true });
+    return () => {
+      window.removeEventListener("resize", updateIndicator);
+      window.removeEventListener("scroll", updateIndicator);
+    };
+  }, [pathname]);
 
   const navLinks = [
     { label: "Accueil", href: "/" },
@@ -46,136 +77,162 @@ export function Header() {
   return (
     <header
       className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-black/60 backdrop-blur-lg" : "bg-transparent"
-      } border-b border-white/10`}
+        isScrolled
+          ? "bg-black/55 shadow-[0_4px_30px_rgba(0,0,0,0.3)] backdrop-blur-xl"
+          : "bg-transparent"
+      }`}
     >
-      <div className="container lg:px-8">
-        {/* Navigation principale */}
-        <nav className="flex h-20 w-full items-center justify-between lg:h-24">
-          {/* Logo */}
-          <Link
-            href="/"
-            className="shrink-0 transform transition-transform duration-200 hover:scale-105"
-          >
-            <Image src="/logoorange.png" alt="Madabest" width={341} height={153} />
-          </Link>
-
-          {/* Navigation Desktop */}
-          <div className="hidden items-center gap-8 lg:flex">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="group relative text-base font-medium text-white transition-colors duration-200 hover:text-[#E2531F]"
-              >
-                {link.label}
-                <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-[#E2531F] transition-all duration-200 group-hover:w-full"></span>
-              </Link>
-            ))}
+      <div className="mx-auto max-w-[1600px] px-4 sm:px-8">
+        {/* Desktop Header */}
+        <nav className="relative hidden h-[153px] w-full items-center lg:flex">
+          {/* Logo légèrement plus à droite et aligné sur la ligne */}
+          <div className="absolute top-1/2 left-[4.5%] -translate-y-1/2">
+            <Link href="/" aria-label="Aller à l'accueil">
+              <Image
+                src="/logo1.png"
+                alt="Madabest"
+                width={550}
+                height={60}
+                priority
+                className="h-[153px] w-[341px] select-none"
+              />
+            </Link>
           </div>
 
-          {/* Actions Desktop */}
-          <div className="hidden items-center gap-4 lg:flex">
-            {/* Recherche (Dialog) */}
+          {/* Ligne blanche + indicateur orange sous le lien actif */}
+          <div ref={lineRef} className="absolute top-[77.12%] right-0 left-[5.74%]">
+            <div className="h-0.5 w-full bg-white/90" />
+            <div
+              className="absolute top-1/2 h-1 -translate-y-1/2 bg-[#E2531F] transition-all duration-300"
+              style={{ left: indicatorStyle.left, width: indicatorStyle.width }}
+            />
+          </div>
+
+          {/* Liens */}
+          <div className="absolute top-[50.98%] right-[31.3%] left-[22.08%] -translate-y-1/2 transform">
+            <div className="flex items-center gap-8">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    ref={isActive ? activeLinkRef : undefined}
+                    className={`group relative text-[16px] leading-[23px] font-medium text-white transition-colors hover:text-[#E2531F] ${
+                      isActive ? "text-[#E2531F]" : ""
+                    }`}
+                  >
+                    {link.label}
+                    {/* Soulignement local au survol – on laisse actif pour feedback mais c'est la grande ligne qui marque la page */}
+                    <span
+                      className={`absolute -bottom-2 left-0 h-0.5 w-full scale-x-0 bg-[#E2531F] transition-transform duration-300 group-hover:scale-x-100 ${
+                        isActive ? "scale-x-100" : ""
+                      }`}
+                    />
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Recherche */}
+          <div className="absolute top-[47.71%] left-[70.3%] -translate-y-1/2">
             <Dialog>
               <DialogTrigger asChild>
                 <Button
                   size="icon"
-                  variant="outline"
+                  variant="ghost"
                   aria-label="Rechercher"
-                  className="border-white/20 bg-transparent text-white/90 hover:bg-white/10"
+                  className="h-[42px] w-[42px] rounded-full border border-white bg-[rgba(31,121,188,0.15)] text-white backdrop-blur-[17px] hover:bg-white/10"
                 >
                   <Search className="h-5 w-5" />
                 </Button>
               </DialogTrigger>
-              <DialogContent className="max-w-2xl border-white/20 bg-black/70 backdrop-blur-lg">
+              <DialogContent className="max-w-xl border-white/20 bg-black/80 backdrop-blur-xl">
                 <DialogHeader>
                   <DialogTitle className="text-white">Rechercher une destination</DialogTitle>
                 </DialogHeader>
                 <div className="relative">
-                  <Search className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 transform text-white/60" />
+                  <Search className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-white/50" />
                   <Input
                     type="text"
-                    placeholder="Rechercher une destination..."
-                    className="w-full rounded-lg border-white/20 bg-white/10 py-3 pr-4 pl-12 text-white placeholder:text-white/60 focus:border-white/40"
+                    placeholder="Ex: Nosy-Be, Antsiranana..."
+                    className="w-full rounded-lg border-white/30 bg-white/10 py-3 pr-4 pl-12 text-white placeholder:text-white/50 focus:border-white/50"
                   />
                 </div>
               </DialogContent>
             </Dialog>
+          </div>
 
-            {/* Sélecteur de langue (Select) */}
+          {/* CTA */}
+          <div className="absolute top-[45.1%] left-[74.58%] -translate-y-1/2">
+            <Button className="rounded bg-[#E2531F] px-[15px] py-1.5 text-[16px] leading-[23px] font-medium text-white hover:bg-[#d64a2e]">
+              Commencer votre réservation
+            </Button>
+          </div>
+
+          {/* Sélecteur de langue */}
+          <div className="absolute top-[45.1%] left-[92.88%] -translate-y-1/2">
             <Select value={lang} onValueChange={setLang}>
-              <SelectTrigger className="border-white/40 text-white">
-                <SelectValue placeholder="Langue" />
+              <SelectTrigger className="h-[35px] w-[72.63px] items-center justify-center gap-2 rounded border-2 border-white bg-transparent px-[13px] text-white">
+                <span className="text-[21px]">{lang === "fr" ? "🇫🇷" : "🇬🇧"}</span>
+                <SelectValue placeholder="FR" />
               </SelectTrigger>
               <SelectContent className="border-white/20 bg-black/90 text-white">
                 <SelectItem value="fr">🇫🇷 FR - Français</SelectItem>
                 <SelectItem value="en">🇬🇧 EN - English</SelectItem>
               </SelectContent>
             </Select>
-
-            {/* CTA Button */}
-            <Button
-              size="lg"
-              className="rounded bg-[#E2531F] px-6 text-base font-medium text-white shadow-lg shadow-orange-500/30 hover:bg-[#d64a2e]"
-            >
-              Commencer votre réservation
-            </Button>
           </div>
-
-          {/* Menu Mobile (Dialog) */}
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button
-                size="icon"
-                variant="ghost"
-                aria-label="Menu"
-                className="text-white lg:hidden"
-              >
-                <Menu className="h-6 w-6" />
-              </Button>
-            </DialogTrigger>
-            <DialogContent
-              className="inset-0 top-0 left-0 h-dvh w-full translate-x-0 translate-y-0 rounded-none border-0 bg-black/90 p-6 text-white sm:max-w-none"
-              showCloseButton={false}
-            >
-              <div className="flex items-center justify-between">
-                <Link href="/" className="shrink-0">
-                  <Image src="/logoorange.png" alt="Madabest" width={112} height={32} />
-                </Link>
-                <DialogClose asChild>
-                  <Button size="icon" variant="ghost" aria-label="Fermer">
-                    <X className="h-6 w-6" />
-                  </Button>
-                </DialogClose>
-              </div>
-              <div className="mt-6 flex flex-col gap-4">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="py-2 text-base font-medium text-white transition-colors hover:text-[#E2531F]"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-                <div className="border-t border-white/20 pt-4">
-                  <Button
-                    size="lg"
-                    className="w-full bg-[#E2531F] font-medium text-white hover:bg-[#d64a2e]"
-                  >
-                    Commencer votre réservation
-                  </Button>
-                </div>
-              </div>
-            </DialogContent>
-          </Dialog>
         </nav>
-        {/* The old inline search bar and mobile dropdown are replaced by shadcn Dialogs above */}
-      </div>
 
-      {/* Ligne de séparation animée */}
-      <div className="h-0.5 bg-linear-to-r from-transparent via-[#E2531F] to-transparent" />
+        {/* Mobile Header */}
+        <nav className="relative flex h-20 w-full items-center justify-between lg:hidden">
+          <div className="flex items-center gap-2">
+            <Button
+              size="icon"
+              variant="ghost"
+              aria-label="Recherche"
+              className="h-10 w-10 rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-md hover:bg-white/20"
+            >
+              <Search className="h-5 w-5" />
+            </Button>
+
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button
+                  size="icon"
+                  variant="ghost"
+                  aria-label="Ouvrir le menu"
+                  className="text-white"
+                >
+                  <Menu className="h-7 w-7" />
+                </Button>
+              </SheetTrigger>
+
+              <SheetContent side="right" className="bg-black/95 p-0 text-white">
+                <div className="flex flex-col gap-1 p-2">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="rounded-md px-4 py-3 text-base font-medium tracking-wide text-white/90 hover:bg-white/10 hover:text-white"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                  <div className="border-t border-white/10 py-4" />
+                  <div className="px-4 pb-6">
+                    <Button className="w-full rounded-full bg-[#E2531F] py-3 text-base font-semibold text-white hover:bg-[#d64a2e]">
+                      Réserver maintenant
+                    </Button>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
+        </nav>
+      </div>
     </header>
   );
 }

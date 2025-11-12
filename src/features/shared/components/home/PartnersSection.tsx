@@ -1,123 +1,108 @@
 "use client";
 
-import type { Partner } from "@/types/homepage";
+import Image from "next/image";
 
-const partners: { official: Partner[]; airlines: Partner[] } = {
-  official: [
-    {
-      id: "1",
-      name: "Madagascar National Parks",
-      logo: "/images/partners/mnp.png",
-      category: "official",
-    },
-    {
-      id: "2",
-      name: "Office National du Tourisme",
-      logo: "/images/partners/ont.png",
-      category: "official",
-    },
-    { id: "3", name: "WWF Madagascar", logo: "/images/partners/wwf.png", category: "official" },
-    {
-      id: "4",
-      name: "Conservation International",
-      logo: "/images/partners/ci.png",
-      category: "official",
-    },
-  ],
-  airlines: [
-    {
-      id: "5",
-      name: "Air Madagascar",
-      logo: "/images/airlines/air-madagascar.png",
-      category: "airline",
-    },
-    { id: "6", name: "Air France", logo: "/images/airlines/air-france.png", category: "airline" },
-    {
-      id: "7",
-      name: "Air Mauritius",
-      logo: "/images/airlines/air-mauritius.png",
-      category: "airline",
-    },
-    {
-      id: "8",
-      name: "Kenya Airways",
-      logo: "/images/airlines/kenya-airways.png",
-      category: "airline",
-    },
-    {
-      id: "9",
-      name: "Air Seychelles",
-      logo: "/images/airlines/air-seychelles.png",
-      category: "airline",
-    },
-    {
-      id: "10",
-      name: "Air Austral",
-      logo: "/images/airlines/air-austral.png",
-      category: "airline",
-    },
-    { id: "11", name: "Airlink", logo: "/images/airlines/airlink.png", category: "airline" },
-    { id: "12", name: "Emirates", logo: "/images/airlines/emirates.png", category: "airline" },
-  ],
-};
-
-const institutional = [
-  { id: "i1", name: "UNWTO", logo: "/images/institutional/unwto.png" },
-  { id: "i2", name: "IATA", logo: "/images/institutional/iata.png" },
+const ALL_PARTNERS = [
+  "Accord-AT.svg",
+  "Accord-MTD.svg",
+  "Air-Austral.svg",
+  "Air-emirates.svg",
+  "Air-france.svg",
+  "Air-kenya.svg",
+  "Air-Link.svg",
+  "Air-Mauritius.svg",
+  "Air-seychelles.svg",
+  "Air-Mada.svg",
+  "PartenaireOfficiel-MadaDiego.svg",
+  "PartenaireOfficiel-Madagascar-National-Parks-180x180.svg",
+  "PartenaireOfficiel-Nosybe.svg",
+  "PartenaireOfficiel-otm.svg",
 ];
+
+const officials = ALL_PARTNERS.filter((file) => file.startsWith("PartenaireOfficiel-"));
+const institutional = ALL_PARTNERS.filter((file) => file.startsWith("Accord-"));
+const airlines = ALL_PARTNERS.filter((file) => file.startsWith("Air-"));
+
+function labelFromFilename(name: string) {
+  return name
+    .replace(/\.[^.]+$/, "")
+    .replace(/[-_]+/g, " ")
+    .replace(/\b\w/g, (m) => m.toUpperCase());
+}
 
 export function PartnersSection() {
   return (
     <section className="bg-[#FFF6E4] py-20 lg:py-28">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-16 lg:grid-cols-2 lg:gap-20">
-          {/* Partenaires Officiels */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-[30px]">
+        {/* First Row - Official Partners and Institutional Agreements */}
+        <div className="mb-20 grid gap-16 lg:grid-cols-2">
+          {/* Nos Partenaires Officiels */}
           <div>
-            <h2 className="mb-12 text-4xl font-semibold text-black lg:text-5xl">
+            <h2 className="mb-12 text-[48px] leading-[69px] font-medium text-black">
               Nos Partenaires Officiels
             </h2>
-            <div className="grid grid-cols-2 gap-8">
-              {partners.official.map((partner) => (
+            <div className="grid grid-cols-1 md:grid-cols-4">
+              {officials.map((file) => (
                 <div
-                  key={partner.id}
-                  className="flex items-center justify-center rounded-lg bg-white p-6 transition-shadow duration-300 hover:shadow-xl"
+                  key={file}
+                  className="flex h-[91px] w-full items-center justify-center bg-transparent p-4 transition-shadow duration-300"
                 >
-                  <div className="h-24 w-24 rounded bg-gray-300" />
+                  <Image
+                    src={`/partners/${file}`}
+                    alt={labelFromFilename(file)}
+                    width={160}
+                    height={64}
+                    className="h-20 w-auto object-contain"
+                  />
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Accords Institutionnels */}
+          {/* Nos Accords Institutionnels */}
           <div>
-            <h2 className="mb-12 text-4xl font-semibold text-black lg:text-5xl">
+            <h2 className="mb-12 text-[48px] leading-[69px] font-medium text-black">
               Nos Accords Institutionnels
             </h2>
-            <div className="grid grid-cols-2 gap-8">
-              {institutional.map((item) => (
+            <div className="grid grid-cols-2">
+              {institutional.map((file) => (
                 <div
-                  key={item.id}
-                  className="flex items-center justify-center rounded-lg bg-white p-6 transition-shadow duration-300 hover:shadow-xl"
+                  key={file}
+                  className="flex h-20 w-full items-center justify-center rounded-lg bg-transparent p-4 transition-shadow duration-300"
                 >
-                  <div className="h-20 w-32 rounded bg-gray-300" />
+                  <Image
+                    src={`/partners/${file}`}
+                    alt={labelFromFilename(file)}
+                    width={160}
+                    height={64}
+                    className="h-20 w-auto object-contain"
+                  />
                 </div>
               ))}
             </div>
           </div>
         </div>
 
-        {/* Partenaires Aériens */}
-        <div className="mt-20">
-          <h2 className="mb-12 text-4xl font-semibold text-black lg:text-5xl">
+        {/* Nos Partenaires Aériens */}
+        <div>
+          <h2 className="mb-12 text-[48px] leading-[69px] font-medium text-black">
             Nos Partenaires Aériens
           </h2>
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-            {partners.airlines.map((airline) => (
+            {airlines.map((file) => (
               <div
-                key={airline.id}
-                className="flex transform cursor-pointer items-center justify-center rounded-lg bg-white p-6 transition-shadow duration-300 hover:scale-105 hover:shadow-xl"
+                key={file}
+                className="flex h-[134px] w-full transform cursor-pointer items-center justify-center rounded-lg bg-transparent p-6 transition-shadow duration-300 hover:scale-105"
               >
-                <div className="h-16 w-32 rounded bg-gray-300" />
+                <div className="text-center">
+                  <Image
+                    src={`/partners/${file}`}
+                    alt={labelFromFilename(file)}
+                    width={200}
+                    height={80}
+                    className="mx-auto h-50 w-auto object-contain"
+                  />
+                </div>
               </div>
             ))}
           </div>

@@ -11,9 +11,9 @@ import { Header } from "@/features/shared/components/layout/Header";
 
 export default function Home() {
   return (
-    <>
+    <div className="relative flex min-h-screen flex-col bg-[#FFF6E4]">
       <Header />
-      <main className="min-h-screen">
+      <main className="flex-1">
         <HeroSection />
         <AboutSection />
         <ToursSection />
@@ -22,6 +22,6 @@ export default function Home() {
         <PartnersSection />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
