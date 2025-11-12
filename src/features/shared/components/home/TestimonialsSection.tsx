@@ -49,15 +49,15 @@ export function TestimonialsSection() {
         <div className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div className="space-y-4">
             {/* Subtitle */}
-            <p className="text-[24px] leading-[35px] font-[var(--font-kaushan-script)] text-[#E2531F]">
+            <p className="text-[24px] leading-[35px] font-(--font-kaushan-script) text-[#E2531F]">
               Ce qu&apos;ils disent
             </p>
+            <div className="h-[3px] w-[77px] bg-[#E2531F]" />
             {/* Main Title */}
             <h2 className="max-w-[422px] text-[48px] leading-[69px] font-medium text-black">
               Ce que nos clients disent de nous
             </h2>
             {/* Orange line indicator */}
-            <div className="h-[3px] w-[77px] bg-[#E2531F]" />
           </div>
 
           {/* Navigation Controls */}
