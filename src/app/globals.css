@@ -236,4 +236,22 @@
   .font-script {
     font-family: "Parisienne", cursive;
   }
+
+  /* Styles pour Mapbox */
+  .mapboxgl-canvas {
+    outline: none;
+  }
+
+  .mapboxgl-ctrl-attrib {
+    display: none !important;
+  }
+
+  .custom-marker {
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .custom-marker:hover {
+    transform: scale(1.1);
+  }
 }
