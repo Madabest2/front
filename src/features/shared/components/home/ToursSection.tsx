@@ -21,6 +21,7 @@ import {
   Search,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const tours = [
@@ -268,17 +269,20 @@ function TourCard({ tour }: { tour: (typeof tours)[0] }) {
 
         {/* Reserve Button */}
         <Button
+          asChild
           size="lg"
           className="w-full gap-2 rounded bg-[#E2531F] px-[15px] py-1.5 text-[16px] leading-[23px] font-medium text-white hover:bg-[#d64a2e]"
         >
-          Réserver
-          <Image
-            src={`/ticket.png`}
-            alt={"ticket"}
-            width={20}
-            height={20}
-            className="h-5 w-auto object-contain"
-          />
+          <Link href="/payment" className="flex items-center justify-center gap-2">
+            Réserver
+            <Image
+              src={`/ticket.png`}
+              alt={"ticket"}
+              width={20}
+              height={20}
+              className="h-5 w-auto object-contain"
+            />
+          </Link>
         </Button>
       </div>
     </Card>
