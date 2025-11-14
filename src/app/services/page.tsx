@@ -149,26 +149,29 @@ export default function ServicesPage() {
               fill="#E2531F"
             />
           </svg>
-          <div className="relative flex w-full justify-center gap-6 px-4">
-            {cards.map((c, i) => (
-              <motion.div
-                key={i}
-                style={{
-                  transform: `translateX(${c.offsetX}px) translateY(${c.offsetY}px)`,
-                  zIndex: cards.length - i,
-                }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.6,
-                  delay: i * 0.15,
-                }}
-                className="relative"
-              >
-                <ServiceCard {...c} index={i} />
-              </motion.div>
-            ))}
+          <div className="relative w-full overflow-x-auto lg:overflow-x-visible">
+            <div className="flex w-max snap-x snap-mandatory gap-6 px-4 lg:w-full lg:snap-none lg:justify-center">
+              {cards.map((c, i) => (
+                <motion.div
+                  key={i}
+                  style={{
+                    transform: `translateX(${c.offsetX}px) translateY(${c.offsetY}px)`,
+                    zIndex: cards.length - i,
+                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.6,
+                    delay: i * 0.15,
+                  }}
+                  className="relative snap-center lg:snap-none"
+                >
+                  <ServiceCard {...c} index={i} />
+                </motion.div>
+              ))}
+            </div>
           </div>
+
           <div className="mx-auto mt-20 max-w-3xl text-center">
             <h2 className="mb-4 text-2xl font-medium text-[#0D0D0D]">Des aventures inoubliables</h2>
             <p className="text-[20px] leading-[29px] text-[#0D0D0D]">

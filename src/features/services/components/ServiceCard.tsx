@@ -65,9 +65,37 @@ export function ServiceCard({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40, rotate: rotation - 10 }}
-      animate={{ opacity: 1, y: 0, rotate: rotation }}
-      transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: index * 0.15 }}
+      initial={{ opacity: 0, y: 24, rotate: rotation - 4, scale: 0.98 }}
+      animate={{
+        opacity: 1,
+        y: [0, -10, 0],
+        rotate: [rotation, rotation + 1.2, rotation],
+        scale: [1, 1.02, 1],
+      }}
+      transition={{
+        y: {
+          duration: 2.2,
+          repeat: Infinity,
+          repeatDelay: 0.2,
+          ease: "easeInOut",
+          delay: 0.2 + index * 0.08,
+        },
+        rotate: {
+          duration: 2.2,
+          repeat: Infinity,
+          repeatDelay: 0.2,
+          ease: "easeInOut",
+          delay: 0.2 + index * 0.08,
+        },
+        scale: {
+          duration: 2.2,
+          repeat: Infinity,
+          repeatDelay: 0.2,
+          ease: "easeInOut",
+          delay: 0.2 + index * 0.08,
+        },
+        opacity: { duration: 0.3, delay: 0.05 + index * 0.08 },
+      }}
       className={cn("transition-transform duration-500 ease-out", className)}
     >
       <div
