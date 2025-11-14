@@ -10,9 +10,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/features/design-system/components/ui/select";
-import { Bookmark, ChevronDown, ChevronRight, Euro, MapPin, Search } from "lucide-react";
-import { useState } from "react";
+import { useDestinationSearch } from "@/features/shared/hooks/useDestinationSearch";
+import {
+  Bookmark,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Euro,
+  MapPin,
+  Search,
+} from "lucide-react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const tours = [
   {
@@ -46,7 +55,31 @@ const tours = [
 ];
 
 export function ToursSection() {
-  const [searchQuery, setSearchQuery] = useState("");
+  // Hook for text search across destination & title
+  const {
+    query: searchQuery,
+    setQuery: setSearchQuery,
+    filtered,
+  } = useDestinationSearch(tours, {
+    debounce: 150,
+  });
+  // Optional location filter (from Select component)
+  const [locationFilter, setLocationFilter] = useState<string | null>(null);
+  // Carousel state (mobile)
+  const [activeIndex, setActiveIndex] = useState(0);
+  const visibleTours = filtered.filter((t) =>
+    locationFilter ? t.destination.toLowerCase() === locationFilter : true
+  );
+
+  // Reset active index if results shrink
+  useEffect(() => {
+    if (activeIndex >= visibleTours.length) {
+      setActiveIndex(0);
+    }
+  }, [visibleTours.length, activeIndex]);
+
+  const prev = () => setActiveIndex((i) => (i === 0 ? visibleTours.length - 1 : i - 1));
+  const next = () => setActiveIndex((i) => (i === visibleTours.length - 1 ? 0 : i + 1));
 
   return (
     <section className="relative min-h-[779px] w-full overflow-hidden">
@@ -88,13 +121,13 @@ export function ToursSection() {
                 placeholder="Recherchez votre prochaine destination..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="h-[44px] rounded-[8px] border-none bg-[rgba(255,255,255,0.14)] py-6 pr-4 pl-12 text-[16px] leading-[23px] font-medium text-white backdrop-blur-[12px] placeholder:text-white/70 focus:bg-white/20"
+                className="h-11 rounded-xl border-none bg-[rgba(255,255,255,0.14)] py-6 pr-4 pl-12 text-[16px] leading-[23px] font-medium text-white backdrop-blur-md placeholder:text-white/70 focus:bg-white/20"
               />
             </div>
 
             {/* Location Dropdown - Width: 220px, Height: 44px */}
-            <Select>
-              <SelectTrigger className="h-[44px] w-full rounded-[8px] border-none bg-white text-[#E2531F] backdrop-blur-[12px] sm:w-[220px]">
+            <Select onValueChange={(v) => setLocationFilter(v || null)}>
+              <SelectTrigger className="h-11 w-full rounded-xl border-none bg-white text-[#E2531F] backdrop-blur-md sm:w-[220px]">
                 <div className="flex w-full items-center gap-3">
                   <MapPin className="h-[27px] w-[27px] shrink-0 text-[#E2531F]" />
                   <SelectValue
@@ -123,16 +156,67 @@ export function ToursSection() {
           Voir toutes les destinations
         </Button>
 
-        {/* Tours Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {tours.map((tour) => (
+        {/* Mobile Carousel */}
+        <div className="md:hidden">
+          {visibleTours.length > 0 ? (
+            <div className="relative mx-auto max-w-sm">
+              <TourCard tour={visibleTours[activeIndex]} />
+              {visibleTours.length > 1 && (
+                <div className="absolute inset-x-0 top-1/2 flex -translate-y-1/2 items-center justify-between px-2">
+                  <button
+                    onClick={prev}
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/90 shadow active:scale-95"
+                    aria-label="Précédent"
+                  >
+                    <ChevronLeft className="h-5 w-5 text-black" />
+                  </button>
+                  <button
+                    onClick={next}
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/90 shadow active:scale-95"
+                    aria-label="Suivant"
+                  >
+                    <ChevronRight className="h-5 w-5 text-black" />
+                  </button>
+                </div>
+              )}
+              {/* Dots */}
+              {visibleTours.length > 1 && (
+                <div className="mt-4 flex justify-center gap-2">
+                  {visibleTours.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setActiveIndex(i)}
+                      className={`h-2 w-2 rounded-full ${
+                        i === activeIndex ? "bg-[#E2531F]" : "bg-white/50"
+                      }`}
+                      aria-label={`Aller à la carte ${i + 1}`}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          ) : (
+            <p className="mt-8 text-center text-white/80">
+              Aucun résultat pour &quot;{searchQuery}&quot;
+            </p>
+          )}
+        </div>
+
+        {/* Desktop / Tablet Grid */}
+        <div className="hidden gap-6 md:grid md:grid-cols-2 lg:grid-cols-4">
+          {visibleTours.map((tour) => (
             <TourCard key={tour.id} tour={tour} />
           ))}
         </div>
-
-        {/* Navigation Arrow */}
-        <div className="mt-8 flex justify-end">
+        {visibleTours.length === 0 && (
+          <p className="mt-8 hidden text-center text-white/80 md:block">
+            Aucune destination trouvée
+          </p>
+        )}
+        {/* Desktop navigation arrow (optional) */}
+        <div className="mt-8 hidden justify-end md:flex">
           <button
+            onClick={next}
             className="flex h-[53px] w-[53px] items-center justify-center rounded-full bg-white shadow-[-3px_4px_4px_rgba(0,0,0,0.25)] transition-transform hover:scale-110"
             aria-label="Suivant"
           >
@@ -146,7 +230,7 @@ export function ToursSection() {
 
 function TourCard({ tour }: { tour: (typeof tours)[0] }) {
   return (
-    <Card className="group relative h-auto w-full cursor-pointer overflow-hidden rounded-[15px] border border-white bg-[rgba(255,255,255,0.2)] backdrop-blur-[4px] transition-all duration-300 hover:scale-105 hover:bg-white/30">
+    <Card className="group relative h-auto w-full cursor-pointer overflow-hidden rounded-[15px] border border-white bg-[rgba(255,255,255,0.2)] backdrop-blur-xs transition-all duration-300 hover:scale-105 hover:bg-white/30">
       {/* Image - Height: 235px */}
       <div className="relative h-[235px] w-full overflow-hidden rounded-t-[15px]">
         <div
@@ -156,7 +240,7 @@ function TourCard({ tour }: { tour: (typeof tours)[0] }) {
         <div className="absolute inset-0 bg-black/20" />
 
         {/* Bookmark Badge - Position: top-right */}
-        <button className="absolute top-[20px] right-[20px] flex h-[46px] w-[46px] items-center justify-center rounded-full border border-[#E2531F] bg-[rgba(226,83,31,0.17)] backdrop-blur-[6px] transition-transform hover:scale-110">
+        <button className="absolute top-5 right-5 flex h-[46px] w-[46px] items-center justify-center rounded-full border border-[#E2531F] bg-[rgba(226,83,31,0.17)] backdrop-blur-sm transition-transform hover:scale-110">
           <Bookmark className="h-6 w-6 fill-white text-white" />
         </button>
 
@@ -176,7 +260,7 @@ function TourCard({ tour }: { tour: (typeof tours)[0] }) {
 
         {/* Price */}
         <div className="flex items-center gap-2">
-          <Euro className="h-[40px] w-[40px] text-[#E2531F]" />
+          <Euro className="h-10 w-10 text-[#E2531F]" />
           <span className="text-[32px] leading-[46px] font-medium text-[#E2531F]">
             {tour.price.toFixed(2)}
           </span>
@@ -185,7 +269,7 @@ function TourCard({ tour }: { tour: (typeof tours)[0] }) {
         {/* Reserve Button */}
         <Button
           size="lg"
-          className="w-full gap-2 rounded bg-[#E2531F] px-[15px] py-[6px] text-[16px] leading-[23px] font-medium text-white hover:bg-[#d64a2e]"
+          className="w-full gap-2 rounded bg-[#E2531F] px-[15px] py-1.5 text-[16px] leading-[23px] font-medium text-white hover:bg-[#d64a2e]"
         >
           Réserver
           <Image

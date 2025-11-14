@@ -14,7 +14,9 @@ export default function Home() {
     <div className="relative flex min-h-screen flex-col bg-[#FFF6E4]">
       <Header />
       <main className="flex-1">
-        <HeroSection />
+        <div className="hidden lg:block">
+          <HeroSection />
+        </div>
         <AboutSection />
         <ToursSection />
         <TestimonialsSection />

@@ -1,9 +1,7 @@
 "use client";
 
 import { Button } from "@/features/design-system/components/ui/button";
-import { Input } from "@/features/design-system/components/ui/input";
 import { Facebook, Instagram, Linkedin, MessageCircle, Twitter } from "lucide-react";
-import { useState } from "react";
 
 const socialLinks = [
   { icon: Facebook, url: "#", label: "Facebook" },
@@ -14,10 +12,15 @@ const socialLinks = [
 ];
 
 export function HeroSection() {
-  const [searchQuery, setSearchQuery] = useState("");
-
   return (
     <section className="relative h-[92vh] w-full overflow-hidden">
+      <div
+        className="absolute inset-0 bg-cover bg-center lg:hidden"
+        style={{ backgroundImage: "url('/hero/right.jpg')" }}
+      />
+
+      {/* Gradient pour lisibilité */}
+      <div className="absolute inset-0 bg-linear-to-b from-black/40 via-black/20 to-black/70 lg:hidden" />
       {/* Backgrounds: Left / Center / Right panels like the mockup */}
       <div className="absolute inset-0">
         {/* Left background image */}
@@ -43,7 +46,7 @@ export function HeroSection() {
 
       {/* Woman image - Right side */}
       <div
-        className="absolute top-[304px] left-[993px] h-[567px] w-[851px] bg-contain bg-right bg-no-repeat lg:block"
+        className="absolute top-[304px] left-[993px] hidden h-[567px] w-[851px] bg-contain bg-right bg-no-repeat lg:block"
         style={{ backgroundImage: "url('/hero/woman.png')" }}
       />
 
@@ -190,39 +193,26 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Mobile Version (unchanged) */}
-      <div className="relative z-10 px-4 pt-32 lg:hidden">
-        <h2 className="mb-6 text-xl leading-relaxed font-medium text-white">
-          Découvrez Madagascar autrement : explorez des lieux exotiques et organisez vos circuits
-        </h2>
-        <h1 className="mb-8 text-4xl font-medium text-white">Je veux visiter...</h1>
-        <Input
-          type="text"
-          placeholder="Rechercher une destination..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="mb-8 h-14 rounded-lg border-white/20 bg-white/10 text-white placeholder:text-white/70"
-        />
-        <div className="grid grid-cols-2 gap-4">
-          {["Antsohihy", "Diego-Suarez", "Nosy-Be", "Ambanja"].map((name) => (
-            <div
-              key={name}
-              className="relative h-40 overflow-hidden rounded-2xl border-2 border-white"
-            >
-              <div
-                className="absolute inset-0 bg-cover bg-center"
-                style={{
-                  backgroundImage: `url('/hero/${
-                    name === "Diego-Suarez" ? "Diego suarez" : name
-                  }.jpg')`,
-                }}
-              />
-              <div className="absolute inset-0 bg-black/20" />
-              <div className="absolute right-0 bottom-0 left-0 p-3">
-                <h3 className="text-lg font-medium text-white">{name}</h3>
-              </div>
-            </div>
-          ))}
+      {/* Mobile Version */}
+      <div className="relative z-10 flex h-full flex-col justify-center px-4 py-12 lg:hidden">
+        <div className="max-w-md rounded-xl bg-black/50 p-5 shadow-lg backdrop-blur-sm">
+          <h2 className="mb-4 text-base leading-relaxed font-medium text-white">
+            Découvrez Madagascar autrement : explorez des lieux exotiques et organisez vos circuits
+          </h2>
+          <h1 className="text-3xl leading-snug font-semibold text-white">Je veux visiter...</h1>
+          {/* Social links (mobile) */}
+          <div className="mt-6 flex items-center gap-4">
+            {socialLinks.map((social, index) => (
+              <a
+                key={index}
+                href={social.url}
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors duration-200 hover:bg-[#E2531F]"
+                aria-label={social.label}
+              >
+                <social.icon className="h-5 w-5" />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </section>

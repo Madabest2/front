@@ -56,9 +56,9 @@ export function TestimonialsSection() {
               Ce que nos clients disent de nous
             </h2>
           </div>
-          {/* Controls */}
-          <div className="flex items-center gap-4 pt-2">
-            <Button className="flex h-[38px] items-center rounded-[4px] bg-white px-[15px] text-[16px] leading-[23px] font-medium text-black shadow-[0px_5px_9px_rgba(0,0,0,0.25)] hover:bg-gray-50">
+          {/* Controls (desktop only) */}
+          <div className="hidden items-center gap-4 pt-2 lg:flex">
+            <Button className="flex h-[38px] items-center rounded bg-white px-[15px] text-[16px] leading-[23px] font-medium text-black shadow-[0px_5px_9px_rgba(0,0,0,0.25)] hover:bg-gray-50">
               Voir tous les avis
             </Button>
             <div className="flex gap-3">
@@ -80,8 +80,29 @@ export function TestimonialsSection() {
           </div>
         </div>
 
-        {/* Cards */}
-        <div className="grid gap-8 lg:grid-cols-2">
+        {/* Mobile carousel: one card visible with left/right buttons */}
+        <div className="lg:hidden">
+          <TestimonialCard testimonial={testimonials[activeIndex]} index={activeIndex} active />
+          <div className="mt-6 flex items-center justify-center gap-4">
+            <button
+              onClick={handlePrev}
+              className="flex h-[38px] w-[38px] items-center justify-center rounded-full bg-white shadow-[-3px_4px_4px_rgba(0,0,0,0.25)] active:scale-95"
+              aria-label="Précédent"
+            >
+              <ChevronLeft className="h-5 w-5 text-black" />
+            </button>
+            <button
+              onClick={handleNext}
+              className="flex h-[38px] w-[38px] items-center justify-center rounded-full bg-white shadow-[-3px_4px_4px_rgba(0,0,0,0.25)] active:scale-95"
+              aria-label="Suivant"
+            >
+              <ChevronRight className="h-5 w-5 text-black" />
+            </button>
+          </div>
+        </div>
+
+        {/* Desktop grid: show both cards */}
+        <div className="hidden gap-8 lg:grid lg:grid-cols-2">
           {testimonials.map((t, i) => (
             <TestimonialCard key={t.id} testimonial={t} index={i} active={i === activeIndex} />
           ))}

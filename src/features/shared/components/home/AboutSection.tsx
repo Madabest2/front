@@ -29,9 +29,9 @@ const services = [
 
 export function AboutSection() {
   return (
-    <section className="relative bg-black lg:py-32">
+    <section className="relative bg-black py-16 lg:py-32">
       {/* White decoration - Position from Figma */}
-      <div className="absolute -top-12 left-30 h-[198px] w-[441px] opacity-100">
+      <div className="absolute -top-12 left-30 hidden h-[198px] w-[441px] opacity-100 lg:block">
         <Image
           src="/logoblanc.png"
           alt="Madabest"
@@ -63,8 +63,26 @@ export function AboutSection() {
               </Button>
             </div>
 
-            {/* Polaroids - Exact positions from Figma */}
-            <div className="relative h-[341px] w-full">
+            {/* Mobile/Tablet: clean grid */}
+            <div className="grid grid-cols-2 gap-4 lg:hidden">
+              {["tsingy.jpg", "baobab.jpg", "nosybe.jpg", "ricefield.jpg"].map((img) => (
+                <div
+                  key={img}
+                  className="overflow-hidden rounded-md border-2 border-white bg-white p-2"
+                >
+                  <Image
+                    src={`/polaroid/${img}`}
+                    alt="Madabest"
+                    width={280}
+                    height={220}
+                    className="h-36 w-full rounded-sm object-cover sm:h-40"
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop collage - Exact positions from Figma (unchanged) */}
+            <div className="relative hidden h-[341px] w-full lg:block">
               {/* Photo 1 - Position: left: 75.87px, top: 1249px, rotation: -7.48deg */}
               <div
                 className="absolute top-0 left-[55.87px] h-[210px] w-[190px] transform"

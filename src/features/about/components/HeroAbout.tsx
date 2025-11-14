@@ -16,15 +16,19 @@ export function HeroAbout() {
 
 function ActivitiesBar() {
   return (
-    <div className="absolute bottom-4 left-1/2 z-10 w-[1135px] -translate-x-1/2 rounded-[15px] bg-white/10 backdrop-blur-sm">
-      <div className="flex h-[60px] items-center justify-center px-6 text-white">
-        <div className="flex cursor-pointer flex-wrap items-center justify-center gap-6 text-base font-bold md:text-lg">
-          <span className="hover:border-b-2 hover:border-orange-500">Trekking</span>
-          <span className="hover:border-b-2 hover:border-orange-500">Birdwatching</span>
-          <span className="hover:border-b-2 hover:border-orange-500">Visite de la faune</span>
-          <span className="hover:border-b-2 hover:border-orange-500">Visite communautaire</span>
-          <span className="hover:border-b-2 hover:border-orange-500">Packages tour</span>
-          <span className="hover:border-b-2 hover:border-orange-500">
+    <div className="absolute bottom-4 left-1/2 z-10 w-[95%] -translate-x-1/2 rounded-[15px] bg-white/10 backdrop-blur-sm lg:w-[1135px]">
+      <div className="flex h-[60px] items-center justify-start overflow-x-auto px-6 text-white lg:justify-center">
+        <div className="flex cursor-pointer flex-nowrap items-center justify-start gap-6 text-base font-bold md:text-lg lg:flex-wrap lg:justify-center">
+          <span className="shrink-0 hover:border-b-2 hover:border-orange-500">Trekking</span>
+          <span className="shrink-0 hover:border-b-2 hover:border-orange-500">Birdwatching</span>
+          <span className="shrink-0 hover:border-b-2 hover:border-orange-500">
+            Visite de la faune
+          </span>
+          <span className="shrink-0 hover:border-b-2 hover:border-orange-500">
+            Visite communautaire
+          </span>
+          <span className="shrink-0 hover:border-b-2 hover:border-orange-500">Packages tour</span>
+          <span className="shrink-0 hover:border-b-2 hover:border-orange-500">
             Votre visite personnalisée
           </span>
         </div>
