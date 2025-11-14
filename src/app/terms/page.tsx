@@ -76,15 +76,26 @@ export default function TermsPage() {
   return (
     <div className="min-h-screen bg-[#FFF6E4]">
       <MainLayout>
-        <main className="mx-auto mt-16 w-full max-w-7xl px-4 py-10 sm:mt-20 lg:mt-24 lg:py-16">
+        <main className="mx-auto w-full max-w-7xl px-4 py-10 lg:py-16">
           <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-                Conditions & Modalités
+            <div className="relative w-full lg:h-[309px]">
+              {/* Desktop: follow exact Figma positioning */}
+              <h1
+                className="absolute hidden text-[48px] leading-[69px] font-medium text-[#0D0D0D] lg:z-10 lg:block"
+                style={{
+                  width: "563px",
+                  height: "137px",
+                  left: "calc(50% - 563px/2 - 373.5px)",
+                  top: "172px",
+                  fontFamily: "Jost, sans-serif",
+                }}
+              >
+                Conditions générales de réservation et d’annulation
               </h1>
-              <p className="text-muted-foreground mt-2 text-sm sm:text-base">
-                Retrouvez ici l’ensemble des informations relatives à votre voyage.
-              </p>
+              {/* Mobile/Tablet fallback: normal flow */}
+              <h1 className="block text-3xl leading-9 font-medium text-[#0D0D0D] lg:hidden">
+                Conditions générales de réservation et d’annulation
+              </h1>
             </div>
             <div className="flex gap-2">
               <Button variant="outline" size="sm">

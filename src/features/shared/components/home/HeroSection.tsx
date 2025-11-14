@@ -2,6 +2,7 @@
 
 import { Button } from "@/features/design-system/components/ui/button";
 import { Facebook, Instagram, Linkedin, MessageCircle, Twitter } from "lucide-react";
+import { useState } from "react";
 
 const socialLinks = [
   { icon: Facebook, url: "#", label: "Facebook" },
@@ -12,6 +13,7 @@ const socialLinks = [
 ];
 
 export function HeroSection() {
+  const [selected, setSelected] = useState<number>(3); // 1: Antsohihy, 2: Diego, 3: Nosy-Be, 4: Ambanja
   return (
     <section className="relative h-[92vh] w-full overflow-hidden">
       <div
@@ -78,90 +80,227 @@ export function HeroSection() {
 
         {/* Destination Cards - Absolute positions from Figma */}
         {/* Antsohihy */}
-        <div className="absolute top-[473px] left-[180px] hidden h-[155px] w-[143px] cursor-pointer lg:block">
+        <div
+          className={`absolute top-[473px] left-[180px] hidden cursor-pointer lg:block ${
+            selected === 1 ? "z-10 h-[255px] w-[242px] shadow-xl" : "h-[155px] w-[143px]"
+          } transition-all duration-300`}
+          onMouseEnter={() => setSelected(1)}
+          onClick={() => setSelected(1)}
+        >
           <div className="relative h-full w-full overflow-hidden rounded-[15px] border-2 border-white">
             <div
               className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: "url('/hero/Antsohihy.jpg')" }}
             />
             <div className="absolute inset-0 bg-black/20" />
+            {selected === 1 && (
+              <div className="absolute top-4 right-5 flex h-[37px] w-[37px] items-center justify-center rounded-full bg-white">
+                <svg
+                  width="25"
+                  height="25"
+                  viewBox="0 0 35 35"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="mx-auto my-auto"
+                >
+                  <path
+                    d="M21.2819 13.2739L24.527 10.6933C24.9573 10.3511 25.506 10.1939 26.0522 10.2562C26.5985 10.3185 27.0976 10.5953 27.4398 11.0256C27.782 11.4559 27.9393 12.0046 27.877 12.5508C27.8146 13.0971 27.5379 13.5962 27.1075 13.9384L23.8624 16.519L25.1333 24.7785L22.6995 26.7139L19.8061 19.7447L16.561 22.3252L16.2287 25.238L13.7948 27.1734L12.8369 22.638L8.63376 20.6832L11.0676 18.7478L13.9804 19.0801L17.2255 16.4995L11.087 12.1109L13.5208 10.1755L21.2819 13.2739Z"
+                    stroke="black"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+            )}
             <div className="absolute right-0 bottom-0 left-0 p-3">
               <h3 className="text-[24px] leading-[35px] font-medium text-white">Antsohihy</h3>
+              {selected === 1 && (
+                <div className="mt-2 flex flex-col gap-2">
+                  <Button
+                    size="sm"
+                    className="h-[38px] w-full rounded bg-[#E2531F] px-[15px] text-[16px] leading-[23px] font-medium text-white hover:bg-[#d64a2e]"
+                  >
+                    Je réserve
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="h-[38px] w-full rounded border border-[#E2531F] bg-transparent px-[15px] text-[16px] leading-[23px] font-medium text-white hover:bg-[#E2531F]/10"
+                  >
+                    Découvrir
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </div>
 
         {/* Diego-Suarez */}
-        <div className="absolute top-[472px] left-[334px] hidden h-[155px] w-[143px] cursor-pointer lg:block">
+        <div
+          className={`absolute top-[472px] left-[334px] hidden cursor-pointer lg:block ${
+            selected === 2 ? "z-10 h-[255px] w-[242px] shadow-xl" : "h-[155px] w-[143px]"
+          } transition-all duration-300`}
+          onMouseEnter={() => setSelected(2)}
+          onClick={() => setSelected(2)}
+        >
           <div className="relative h-full w-full overflow-hidden rounded-[15px] border border-white">
             <div
               className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: "url('/hero/Diego suarez.jpg')" }}
             />
             <div className="absolute inset-0 bg-black/20" />
+            {selected === 2 && (
+              <div className="absolute top-4 right-5 flex h-[37px] w-[37px] items-center justify-center rounded-full bg-white">
+                <svg
+                  width="25"
+                  height="25"
+                  viewBox="0 0 35 35"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="mx-auto my-auto"
+                >
+                  <path
+                    d="M21.2819 13.2739L24.527 10.6933C24.9573 10.3511 25.506 10.1939 26.0522 10.2562C26.5985 10.3185 27.0976 10.5953 27.4398 11.0256C27.782 11.4559 27.9393 12.0046 27.877 12.5508C27.8146 13.0971 27.5379 13.5962 27.1075 13.9384L23.8624 16.519L25.1333 24.7785L22.6995 26.7139L19.8061 19.7447L16.561 22.3252L16.2287 25.238L13.7948 27.1734L12.8369 22.638L8.63376 20.6832L11.0676 18.7478L13.9804 19.0801L17.2255 16.4995L11.087 12.1109L13.5208 10.1755L21.2819 13.2739Z"
+                    stroke="black"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+            )}
             <div className="absolute right-0 bottom-0 left-0 p-3">
               <h3 className="text-[24px] leading-[35px] font-medium text-white">Diego-Suarez</h3>
+              {selected === 2 && (
+                <div className="mt-2 flex flex-col gap-2">
+                  <Button
+                    size="sm"
+                    className="h-[38px] w-full rounded bg-[#E2531F] px-[15px] text-[16px] leading-[23px] font-medium text-white hover:bg-[#d64a2e]"
+                  >
+                    Je réserve
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="h-[38px] w-full rounded border border-[#E2531F] bg-transparent px-[15px] text-[16px] leading-[23px] font-medium text-white hover:bg-[#E2531F]/10"
+                  >
+                    Découvrir
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </div>
 
         {/* Nosy-Be - Featured */}
-        <div className="absolute top-[373px] left-[488px] hidden h-[255px] w-[242px] cursor-pointer lg:block">
+        <div
+          className="absolute top-[373px] left-[488px] hidden h-[255px] w-[242px] cursor-pointer lg:block"
+          onMouseEnter={() => setSelected(3)}
+          onClick={() => setSelected(3)}
+        >
           <div className="relative h-full w-full overflow-hidden rounded-[15px] border border-white">
             <div
               className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: "url('/hero/Nosy Be.jpg')" }}
             />
             <div className="absolute inset-0 bg-black/20" />
-            <div className="absolute top-4 right-5 flex h-[37px] w-[37px] items-center justify-center rounded-full bg-white">
-              <svg
-                width="25"
-                height="25"
-                viewBox="0 0 35 35"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="mx-auto my-auto"
-              >
-                <path
-                  d="M21.2819 13.2739L24.527 10.6933C24.9573 10.3511 25.506 10.1939 26.0522 10.2562C26.5985 10.3185 27.0976 10.5953 27.4398 11.0256C27.782 11.4559 27.9393 12.0046 27.877 12.5508C27.8146 13.0971 27.5379 13.5962 27.1075 13.9384L23.8624 16.519L25.1333 24.7785L22.6995 26.7139L19.8061 19.7447L16.561 22.3252L16.2287 25.238L13.7948 27.1734L12.8369 22.638L8.63376 20.6832L11.0676 18.7478L13.9804 19.0801L17.2255 16.4995L11.087 12.1109L13.5208 10.1755L21.2819 13.2739Z"
-                  stroke="black"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
+            {selected === 3 && (
+              <div className="absolute top-4 right-5 flex h-[37px] w-[37px] items-center justify-center rounded-full bg-white">
+                <svg
+                  width="25"
+                  height="25"
+                  viewBox="0 0 35 35"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="mx-auto my-auto"
+                >
+                  <path
+                    d="M21.2819 13.2739L24.527 10.6933C24.9573 10.3511 25.506 10.1939 26.0522 10.2562C26.5985 10.3185 27.0976 10.5953 27.4398 11.0256C27.782 11.4559 27.9393 12.0046 27.877 12.5508C27.8146 13.0971 27.5379 13.5962 27.1075 13.9384L23.8624 16.519L25.1333 24.7785L22.6995 26.7139L19.8061 19.7447L16.561 22.3252L16.2287 25.238L13.7948 27.1734L12.8369 22.638L8.63376 20.6832L11.0676 18.7478L13.9804 19.0801L17.2255 16.4995L11.087 12.1109L13.5208 10.1755L21.2819 13.2739Z"
+                    stroke="black"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+            )}
             <div className="absolute right-0 bottom-0 left-0 p-4">
               <h3 className="mb-4 text-[24px] leading-[35px] font-medium text-white">Nosy-Be</h3>
-              <div className="flex gap-2">
-                <Button
-                  size="sm"
-                  className="h-[38px] rounded bg-[#E2531F] px-[15px] text-[16px] leading-[23px] font-medium text-white hover:bg-[#d64a2e]"
-                >
-                  Je réserve
-                </Button>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="h-[38px] rounded border border-[#E2531F] bg-transparent px-[15px] text-[16px] leading-[23px] font-medium text-white hover:bg-[#E2531F]/10"
-                >
-                  Découvrir
-                </Button>
-              </div>
+              {selected === 3 && (
+                <div className="flex gap-2">
+                  <Button
+                    size="sm"
+                    className="h-[38px] rounded bg-[#E2531F] px-[15px] text-[16px] leading-[23px] font-medium text-white hover:bg-[#d64a2e]"
+                  >
+                    Je réserve
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="h-[38px] rounded border border-[#E2531F] bg-transparent px-[15px] text-[16px] leading-[23px] font-medium text-white hover:bg-[#E2531F]/10"
+                  >
+                    Découvrir
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </div>
 
         {/* Ambanja */}
-        <div className="absolute top-[470px] left-[741px] hidden h-[155px] w-[143px] cursor-pointer lg:block">
+        <div
+          className={`absolute top-[470px] left-[741px] hidden cursor-pointer lg:block ${
+            selected === 4 ? "z-10 h-[255px] w-[242px] shadow-xl" : "h-[155px] w-[143px]"
+          } transition-all duration-300`}
+          onMouseEnter={() => setSelected(4)}
+          onClick={() => setSelected(4)}
+        >
           <div className="relative h-full w-full overflow-hidden rounded-[15px] border border-white">
             <div
               className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: "url('/hero/Ambanja.jpg')" }}
             />
             <div className="absolute inset-0 bg-black/20" />
+            {selected === 4 && (
+              <div className="absolute top-4 right-5 flex h-[37px] w-[37px] items-center justify-center rounded-full bg-white">
+                <svg
+                  width="25"
+                  height="25"
+                  viewBox="0 0 35 35"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="mx-auto my-auto"
+                >
+                  <path
+                    d="M21.2819 13.2739L24.527 10.6933C24.9573 10.3511 25.506 10.1939 26.0522 10.2562C26.5985 10.3185 27.0976 10.5953 27.4398 11.0256C27.782 11.4559 27.9393 12.0046 27.877 12.5508C27.8146 13.0971 27.5379 13.5962 27.1075 13.9384L23.8624 16.519L25.1333 24.7785L22.6995 26.7139L19.8061 19.7447L16.561 22.3252L16.2287 25.238L13.7948 27.1734L12.8369 22.638L8.63376 20.6832L11.0676 18.7478L13.9804 19.0801L17.2255 16.4995L11.087 12.1109L13.5208 10.1755L21.2819 13.2739Z"
+                    stroke="black"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+            )}
             <div className="absolute right-0 bottom-0 left-0 p-3">
               <h3 className="text-[24px] leading-[35px] font-medium text-white">Ambanja</h3>
+              {selected === 4 && (
+                <div className="mt-2 flex flex-col gap-2">
+                  <Button
+                    size="sm"
+                    className="h-[38px] w-full rounded bg-[#E2531F] px-[15px] text-[16px] leading-[23px] font-medium text-white hover:bg-[#d64a2e]"
+                  >
+                    Je réserve
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="h-[38px] w-full rounded border border-[#E2531F] bg-transparent px-[15px] text-[16px] leading-[23px] font-medium text-white hover:bg-[#E2531F]/10"
+                  >
+                    Découvrir
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -180,13 +319,28 @@ export function HeroSection() {
 
         {/* Pagination - Right side */}
         <div className="absolute top-[207px] right-[70px] hidden flex-col gap-4 text-white xl:flex">
-          <span className="text-[16px] leading-[23px] font-medium opacity-60">01</span>
-          <span className="text-[24px] leading-[35px] font-medium opacity-60">02</span>
-          <div className="relative">
-            <span className="text-[40px] leading-[58px] font-medium">03</span>
-            <div className="absolute top-1/2 -left-4 h-[5px] w-[156px] -translate-y-1/2 bg-[#E2531F]" />
-          </div>
-          <span className="text-[24px] leading-[35px] font-medium opacity-60">04</span>
+          {[1, 2, 3, 4].map((i) => {
+            const label = `0${i}`;
+            const isActive = selected === i;
+            return (
+              <div key={i} className={isActive ? "relative" : undefined}>
+                <button
+                  onClick={() => setSelected(i)}
+                  className={
+                    (isActive
+                      ? "text-[40px] leading-[58px]"
+                      : "text-[24px] leading-[35px] opacity-60") +
+                    " font-medium transition-colors hover:text-[#E2531F]"
+                  }
+                >
+                  {label}
+                </button>
+                {isActive && (
+                  <div className="absolute top-1/2 -left-4 h-[5px] w-[156px] -translate-y-1/2 bg-[#E2531F]" />
+                )}
+              </div>
+            );
+          })}
           <button className="mt-2 text-[16px] leading-[23px] font-medium transition-colors hover:text-[#E2531F]">
             Voir plus
           </button>

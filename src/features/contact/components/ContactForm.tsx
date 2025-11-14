@@ -26,7 +26,7 @@ export function ContactForm() {
   const selectedSubject = watch("subject");
 
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 py-12 font-[var(--font-poppins)] md:py-16">
+    <div className="mx-auto w-full max-w-7xl px-4 py-12 font-(--font-poppins) md:py-16">
       {/* Titre principal */}
       <div className="mb-12 text-center">
         <h1 className="mb-4 text-4xl font-medium text-[#0D0D0D] md:text-5xl lg:text-6xl">
@@ -38,10 +38,57 @@ export function ContactForm() {
       </div>
 
       {/* Formulaire de contact (adapté à la maquette) */}
-      <div className="relative mx-auto h-[667px] w-[1196px] overflow-hidden rounded-[10px] bg-white shadow-[0px_0px_60px_30px_rgba(0,0,0,0.03)]">
-        <div className="flex h-full">
-          {/* Panel orange avec informations de contact (509px / 647px) */}
-          <div className="relative -right-2 h-[647px] w-[509px] shrink-0 self-center overflow-hidden rounded-l-[10px] bg-[#E2531F] text-white">
+      <div className="relative mx-auto w-full max-w-[1196px] overflow-hidden rounded-[10px] bg-white shadow-[0px_0px_60px_30px_rgba(0,0,0,0.03)] md:h-[667px]">
+        <div className="flex h-full flex-col md:flex-row">
+          {/* Panel orange mobile */}
+          <div className="w-full rounded-t-[10px] bg-[#E2531F] p-6 text-white md:hidden">
+            <div className="space-y-2">
+              <h2 className="text-[24px] leading-9 font-semibold">Contact Information</h2>
+              <p className="text-[16px] leading-6 text-[#F3D9CF]">
+                Say something to start a live chat!
+              </p>
+            </div>
+
+            <div className="mt-6 space-y-4 text-[16px] leading-6">
+              <div className="flex items-center gap-3">
+                <Phone className="h-5 w-5" />
+                <span>+261 34 28 325 14 /+261 32 05 127 11</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <Mail className="mt-1 h-5 w-5" />
+                <div>
+                  <div>madabesrtip@gmail.com /</div>
+                  <div>contact@madabestour.com</div>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <MapPin className="mt-1 h-5 w-5" />
+                <span>43 Rue de la marne – Diego Suarez</span>
+              </div>
+            </div>
+
+            <div className="mt-6 flex gap-3">
+              {[
+                { Icon: Twitter, href: "#" },
+                { Icon: Instagram, href: "#" },
+                { Icon: Facebook, href: "#" },
+                { Icon: MessageCircle, href: "#" },
+                { Icon: Linkedin, href: "#" },
+              ].map(({ Icon, href }, index) => (
+                <a
+                  key={index}
+                  href={href}
+                  className="flex h-7 w-7 items-center justify-center rounded-full bg-[#1B1B1B] transition-colors hover:bg-[#2B2B2B]"
+                  aria-label="Social media link"
+                >
+                  <Icon className="h-4 w-4 text-white" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Panel orange desktop (509px / 647px) */}
+          <div className="relative -right-2 hidden h-[647px] w-[509px] shrink-0 self-center overflow-hidden rounded-l-[10px] bg-[#E2531F] text-white md:block">
             {/* Cercles décoratifs selon positions maquette */}
             <div className="absolute top-[438px] left-[283px] h-[138px] w-[138px] rounded-full bg-[rgba(247,214,202,0.5)]" />
             <div className="absolute top-[464px] left-[311px] h-[269px] w-[269px] rounded-full bg-[rgba(247,214,202,0.6)]" />
@@ -95,7 +142,7 @@ export function ContactForm() {
           </div>
 
           {/* Zone formulaire (remplit l'espace restant) */}
-          <div className="relative flex-1 px-10 py-8">
+          <div className="relative flex-1 px-6 py-8 md:px-10">
             <form onSubmit={onSubmit} className="h-full space-y-8">
               {/* Messages de retour */}
               {submitSuccess && (
@@ -111,7 +158,7 @@ export function ContactForm() {
               )}
 
               {/* Nom & Prénom (alignés en haut selon maquette) */}
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="firstName" className="text-[12px] font-medium text-[#8D8D8D]">
                     Nom
@@ -149,7 +196,7 @@ export function ContactForm() {
               </div>
 
               {/* Email & Téléphone */}
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="email" className="text-[12px] font-medium text-[#8D8D8D]">
                     Email
@@ -190,7 +237,7 @@ export function ContactForm() {
                   Sélectionnez un sujet
                 </Label>
                 {/* Alignement horizontal quatre options */}
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
                   {contactSubjects.map((subject) => (
                     <label
                       key={subject.value}
