@@ -40,7 +40,7 @@ export function TermsPanel({ section }: { section: Section }) {
             <div className="absolute bottom-3 left-5 flex items-center gap-2">
               <div className="flex h-[27px] w-[27px] items-center justify-center rounded-full border border-white bg-black">
                 <div
-                  className="h-0 w-0 -rotate-90 border-y-[4.7px] border-l-[9.45px] border-y-transparent border-l-[#FFC4AF]"
+                  className="h-0 w-0 border-y-[4.7px] border-l-[9.45px] border-y-transparent border-l-[#FFC4AF]"
                   aria-hidden
                 />
               </div>
@@ -70,7 +70,7 @@ export function TermsPanel({ section }: { section: Section }) {
           {/* Logo zone (≈200x49) */}
           <div className="h-[49px] w-[200px] overflow-hidden">
             <Image
-              src="/partners/ny-havana.png"
+              src="/havana.png"
               alt="NY HAVANA"
               width={200}
               height={49}
