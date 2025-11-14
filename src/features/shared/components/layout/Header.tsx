@@ -125,7 +125,7 @@ export function Header() {
                     {link.label}
                     {/* Soulignement local au survol – on laisse actif pour feedback mais c'est la grande ligne qui marque la page */}
                     <span
-                      className={`absolute -bottom-2 left-0 h-0.5 w-full scale-x-0 bg-[#E2531F] transition-transform duration-300 group-hover:scale-x-100 ${
+                      className={`absolute -bottom-2 left-0 h-0.5 w-full scale-x-0 transition-transform duration-300 group-hover:scale-x-100 ${
                         isActive ? "scale-x-100" : ""
                       }`}
                     />
