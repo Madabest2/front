@@ -211,7 +211,7 @@ export function Header({ textColorClass }: HeaderProps) {
               {lang === "fr" ? (
                 <>
                   <span className="hidden 2xl:inline">Commencer votre réservation</span>
-                  <span className="left-2 items-center text-center 2xl:hidden">Réserver</span>
+                  <span className="2xl:hidden">Réserver</span>
                 </>
               ) : (
                 <>

@@ -330,20 +330,20 @@ export function HeroSection() {
                     (isActive
                       ? "text-[40px] leading-[58px]"
                       : "text-[24px] leading-[35px] opacity-60") +
-                    " font-medium transition-colors hover:text-[#E2531F]"
+                    " font-medium hover:text-[#E2531F]"
                   }
                 >
                   {label}
                 </button>
                 {isActive && (
-                  <div className="absolute top-1/2 -left-4 h-[5px] w-[156px] -translate-y-1/2 bg-[#E2531F]" />
+                  <div className="absolute top-1/2 -left-4 h-[5px] w-[156px] -translate-y-1/2" />
                 )}
               </div>
             );
           })}
-          <button className="mt-2 text-[16px] leading-[23px] font-medium transition-colors hover:text-[#E2531F]">
+          <div className="mt-2 text-[16px] leading-[23px] font-medium transition-colors hover:text-[#E2531F]">
             Voir plus
-          </button>
+          </div>
         </div>
       </div>
 
