@@ -4,35 +4,46 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/features/design-system/co
 import { Button } from "@/features/design-system/components/ui/button";
 import { Card } from "@/features/design-system/components/ui/card";
 import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
-const testimonials = [
-  {
-    id: "1",
-    name: "Sophie Margaret",
-    country: "France",
-    countryFlag: "🇫🇷",
-    rating: 5,
-    title: "Un voyage inoubliable grâce à Madabest !",
-    content:
-      "Moi et mon mari avons découvert Madagascar d'une façon unique. L'équipe de Madabest a su créer un circuit sur mesure parfaitement adapté à nos envies : entre excursions nature, moments culturels et plages paradisiaques, tout était parfaitement organisé. Les guides étaient passionnés, toujours disponibles, et nous ont fait sentir comme des amis plus que comme de simples voyageurs. Un grand merci à toute l'équipe pour leur professionnalisme et leur chaleur humaine. Nous repartons avec des souvenirs extraordinaires et l'envie de revenir !",
-    avatar: "/testimonial/sophie.jpg",
-  },
-  {
-    id: "2",
-    name: "Jean Luc",
-    country: "Espagne",
-    countryFlag: "🇪🇸",
-    rating: 5,
-    title: "Une expérience authentique et parfaitement organisée",
-    content:
-      "J'ai choisi Madabest pour mon voyage à Madagascar, et ce fut une expérience incroyable. L'équipe a tout pris en main : du choix des hôtels aux excursions, en passant par la location de voiture, chaque détail était soigneusement préparé. J'ai particulièrement apprécié la gentillesse des guides et leur connaissance du pays, qui m'ont permis de découvrir des endroits hors des sentiers battus. Je recommande vivement Madabest à tous ceux qui souhaitent explorer Madagascar autrement, avec un service professionnel et chaleureux.",
-    avatar: "/testimonial/jean.jpg",
-  },
-];
+type Testimonial = {
+  id: string;
+  name: string;
+  country: string;
+  countryFlag: string;
+  rating: number;
+  title: string;
+  content: string;
+  avatar: string;
+};
 
 export function TestimonialsSection() {
+  const t = useTranslations("home.testimonials");
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const testimonials: Testimonial[] = [
+    {
+      id: "1",
+      name: t("items.0.name"),
+      country: t("items.0.country"),
+      countryFlag: "🇫🇷",
+      rating: 5,
+      title: t("items.0.title"),
+      content: t("items.0.content"),
+      avatar: "/testimonial/sophie.jpg",
+    },
+    {
+      id: "2",
+      name: t("items.1.name"),
+      country: t("items.1.country"),
+      countryFlag: "🇪🇸",
+      rating: 5,
+      title: t("items.1.title"),
+      content: t("items.1.content"),
+      avatar: "/testimonial/jean.jpg",
+    },
+  ];
 
   const handlePrev = () => {
     setActiveIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
@@ -49,32 +60,30 @@ export function TestimonialsSection() {
         <div className="mb-14 flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div className="space-y-3">
             <div className="flex items-center gap-2">
-              <p className="font-kaushan text-[24px] leading-[35px] text-[#E2531F]">
-                Ce qu’ils disent
-              </p>
+              <p className="font-kaushan text-[24px] leading-[35px] text-[#E2531F]">{t("badge")}</p>
               <div className="h-[3px] w-[77px] bg-[#E2531F]" />
             </div>
             <h2 className="max-w-[520px] text-[48px] leading-[69px] font-medium text-black">
-              Ce que nos clients disent de nous
+              {t("title")}
             </h2>
           </div>
           {/* Controls (desktop only) */}
           <div className="hidden items-center gap-4 pt-2 lg:flex">
             <Button className="flex h-[38px] items-center rounded bg-white px-[15px] text-[16px] leading-[23px] font-medium text-black shadow-[0px_5px_9px_rgba(0,0,0,0.25)] hover:bg-gray-50">
-              Voir tous les avis
+              {t("buttons.seeAll")}
             </Button>
             <div className="flex gap-3">
               <button
                 onClick={handlePrev}
                 className="flex h-[38px] w-[38px] items-center justify-center rounded-full bg-white shadow-[-3px_4px_4px_rgba(0,0,0,0.25)] transition hover:scale-110"
-                aria-label="Précédent"
+                aria-label={t("buttons.previous")}
               >
                 <ChevronLeft className="h-5 w-5 text-black" />
               </button>
               <button
                 onClick={handleNext}
                 className="flex h-[38px] w-[38px] items-center justify-center rounded-full bg-white shadow-[-3px_4px_4px_rgba(0,0,0,0.25)] transition hover:scale-110"
-                aria-label="Suivant"
+                aria-label={t("buttons.next")}
               >
                 <ChevronRight className="h-5 w-5 text-black" />
               </button>
@@ -89,14 +98,14 @@ export function TestimonialsSection() {
             <button
               onClick={handlePrev}
               className="flex h-[38px] w-[38px] items-center justify-center rounded-full bg-white shadow-[-3px_4px_4px_rgba(0,0,0,0.25)] active:scale-95"
-              aria-label="Précédent"
+              aria-label={t("buttons.previous")}
             >
               <ChevronLeft className="h-5 w-5 text-black" />
             </button>
             <button
               onClick={handleNext}
               className="flex h-[38px] w-[38px] items-center justify-center rounded-full bg-white shadow-[-3px_4px_4px_rgba(0,0,0,0.25)] active:scale-95"
-              aria-label="Suivant"
+              aria-label={t("buttons.next")}
             >
               <ChevronRight className="h-5 w-5 text-black" />
             </button>
@@ -117,7 +126,7 @@ export function TestimonialsSection() {
               key={i}
               onClick={() => setActiveIndex(i)}
               className={`size-3 rounded-full transition-all ${i === activeIndex ? "bg-[#E2531F]" : "bg-[#FFC4AF]"}`}
-              aria-label={`Aller au témoignage ${i + 1}`}
+              aria-label={t("navigation.goToTestimonial", { index: i + 1 })}
             />
           ))}
         </div>
@@ -130,7 +139,7 @@ function TestimonialCard({
   testimonial,
   active,
 }: {
-  testimonial: (typeof testimonials)[0];
+  testimonial: Testimonial;
   index: number;
   active: boolean;
 }) {

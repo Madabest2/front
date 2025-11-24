@@ -2,6 +2,7 @@
 
 import { Button } from "@/features/design-system/components/ui/button";
 import { Facebook, Instagram, Linkedin, MessageCircle, Twitter } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 const socialLinks = [
@@ -13,6 +14,7 @@ const socialLinks = [
 ];
 
 export function HeroSection() {
+  const t = useTranslations("home.hero");
   const [selected, setSelected] = useState<number>(3); // 1: Antsohihy, 2: Diego, 3: Nosy-Be, 4: Ambanja
   return (
     <section className="relative h-[92vh] w-full overflow-hidden">
@@ -70,10 +72,8 @@ export function HeroSection() {
 
         {/* Main Text - Left side */}
         <div className="absolute top-[163px] left-[183px] hidden w-[387px] lg:block">
-          <h2 className="mb-5 text-[24px] leading-[35px] font-medium text-white">
-            Découvrez Madagascar autrement : explorez des lieux exotiques et organisez vos circuits
-          </h2>
-          <h1 className="text-[48px] leading-[69px] font-medium text-white">Je veux visiter...</h1>
+          <h2 className="mb-5 text-[24px] leading-[35px] font-medium text-white">{t("title")}</h2>
+          <h1 className="text-[48px] leading-[69px] font-medium text-white">{t("subtitle")}</h1>
         </div>
 
         {/* Search Input */}
@@ -121,14 +121,14 @@ export function HeroSection() {
                     size="sm"
                     className="h-[38px] w-full rounded bg-[#E2531F] px-[15px] text-[16px] leading-[23px] font-medium text-white hover:bg-[#d64a2e]"
                   >
-                    Je réserve
+                    {t("cta.book")}
                   </Button>
                   <Button
                     size="sm"
                     variant="outline"
                     className="h-[38px] w-full rounded border border-[#E2531F] bg-transparent px-[15px] text-[16px] leading-[23px] font-medium text-white hover:bg-[#E2531F]/10"
                   >
-                    Découvrir
+                    {t("cta.discover")}
                   </Button>
                 </div>
               )}
@@ -178,14 +178,14 @@ export function HeroSection() {
                     size="sm"
                     className="h-[38px] w-full rounded bg-[#E2531F] px-[15px] text-[16px] leading-[23px] font-medium text-white hover:bg-[#d64a2e]"
                   >
-                    Je réserve
+                    {t("cta.book")}
                   </Button>
                   <Button
                     size="sm"
                     variant="outline"
                     className="h-[38px] w-full rounded border border-[#E2531F] bg-transparent px-[15px] text-[16px] leading-[23px] font-medium text-white hover:bg-[#E2531F]/10"
                   >
-                    Découvrir
+                    {t("cta.discover")}
                   </Button>
                 </div>
               )}
@@ -233,14 +233,14 @@ export function HeroSection() {
                     size="sm"
                     className="h-[38px] rounded bg-[#E2531F] px-[15px] text-[16px] leading-[23px] font-medium text-white hover:bg-[#d64a2e]"
                   >
-                    Je réserve
+                    {t("cta.book")}
                   </Button>
                   <Button
                     size="sm"
                     variant="outline"
                     className="h-[38px] rounded border border-[#E2531F] bg-transparent px-[15px] text-[16px] leading-[23px] font-medium text-white hover:bg-[#E2531F]/10"
                   >
-                    Découvrir
+                    {t("cta.discover")}
                   </Button>
                 </div>
               )}
@@ -290,14 +290,14 @@ export function HeroSection() {
                     size="sm"
                     className="h-[38px] w-full rounded bg-[#E2531F] px-[15px] text-[16px] leading-[23px] font-medium text-white hover:bg-[#d64a2e]"
                   >
-                    Je réserve
+                    {t("cta.book")}
                   </Button>
                   <Button
                     size="sm"
                     variant="outline"
                     className="h-[38px] w-full rounded border border-[#E2531F] bg-transparent px-[15px] text-[16px] leading-[23px] font-medium text-white hover:bg-[#E2531F]/10"
                   >
-                    Découvrir
+                    {t("cta.discover")}
                   </Button>
                 </div>
               )}
@@ -312,7 +312,9 @@ export function HeroSection() {
               <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-white/20">
                 <span className="text-2xl text-white">+</span>
               </div>
-              <p className="text-[16px] leading-[23px] font-medium text-white">Voir plus</p>
+              <p className="text-[16px] leading-[23px] font-medium text-white">
+                {t("cta.seeMore")}
+              </p>
             </div>
           </div>
         </div>
@@ -342,7 +344,7 @@ export function HeroSection() {
             );
           })}
           <div className="mt-2 text-[16px] leading-[23px] font-medium transition-colors hover:text-[#E2531F]">
-            Voir plus
+            {t("cta.seeMore")}
           </div>
         </div>
       </div>
@@ -350,10 +352,8 @@ export function HeroSection() {
       {/* Mobile Version */}
       <div className="relative z-10 flex h-full flex-col justify-center px-4 py-12 lg:hidden">
         <div className="max-w-md rounded-xl bg-black/50 p-5 shadow-lg backdrop-blur-sm">
-          <h2 className="mb-4 text-base leading-relaxed font-medium text-white">
-            Découvrez Madagascar autrement : explorez des lieux exotiques et organisez vos circuits
-          </h2>
-          <h1 className="text-3xl leading-snug font-semibold text-white">Je veux visiter...</h1>
+          <h2 className="mb-4 text-base leading-relaxed font-medium text-white">{t("title")}</h2>
+          <h1 className="text-3xl leading-snug font-semibold text-white">{t("subtitle")}</h1>
           {/* Social links (mobile) */}
           <div className="mt-6 flex items-center gap-4">
             {socialLinks.map((social, index) => (

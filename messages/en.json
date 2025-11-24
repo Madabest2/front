@@ -1,0 +1,434 @@
+{
+  "common": {
+    "meta": {
+      "title": "MADABEST - Your travel agency in Madagascar",
+      "description": "Discover Madagascar differently with MADABEST: tailor-made tours, excursions, car rentals and hotel bookings"
+    },
+    "navigation": {
+      "home": "Home",
+      "about": "About",
+      "activities": "Our activities",
+      "services": "Our services",
+      "terms": "Terms & conditions",
+      "contact": "Contact"
+    },
+    "cta": {
+      "startReservation": {
+        "long": "Start your reservation",
+        "short": "Book"
+      }
+    },
+    "search": {
+      "open": "Search",
+      "placeholder": "E.g.: Nosy-Be, Antsiranana...",
+      "dialogTitle": "Search for a destination"
+    },
+    "footer": {
+      "followUs": "Follow us",
+      "subscribe": "subscribe",
+      "enterEmail": "Enter your email",
+      "contact": {
+        "heading": "Get in touch"
+      },
+      "privacy": "Privacy Policy",
+      "copyright": "by LANTORIAN",
+      "links": {
+        "vehicleRental": "Vehicle rental",
+        "convictions": "Convictions",
+        "specificTours": "Specific tours",
+        "trekking": "Trekking",
+        "tailorMade": "Tailor made",
+        "excursions": "Excursions"
+      }
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Discover Madagascar differently: explore exotic places and organize your tours",
+      "subtitle": "I want to visit...",
+      "cta": {
+        "book": "I book",
+        "discover": "Discover",
+        "seeMore": "See more"
+      }
+    },
+    "about": {
+      "description": "MADABEST is a Destination Management Company and travel agency specializing in organizing tours in Madagascar. We offer tailor-made and experiential trips, adapted to your desires. Passionate about discovery and deeply attached to Madagascar, our team wants to share this passion with you and make your trip unforgettable.",
+      "learnMore": "Learn more",
+      "adventure": {
+        "title": "Ready to live the adventure?",
+        "subtitle": "Everything to organize your stay in Madagascar:"
+      },
+      "services": {
+        "excursions": "Excursions",
+        "customCircuits": "Tailor-made tours",
+        "carRental": "Car rental",
+        "hotelBooking": "Hotel reservations"
+      }
+    },
+    "tours": {
+      "title": "Our Tour Packages",
+      "subtitle": "Discover your dream destination here",
+      "search": {
+        "placeholder": "Search for your next destination...",
+        "locationPlaceholder": "Where are you going?"
+      },
+      "destinations": {
+        "nosybe": "Nosy-Be",
+        "antsohihy": "Antsohihy",
+        "diegosuarez": "Diego-Suarez",
+        "ambanja": "Ambanja"
+      },
+      "tourTitle": "The treasure of Madagascar",
+      "buttons": {
+        "seeAll": "See all destinations",
+        "book": "Book"
+      },
+      "messages": {
+        "noResults": "No results for \"{query}\"",
+        "noDestinations": "No destinations found"
+      },
+      "navigation": {
+        "previous": "Previous",
+        "next": "Next",
+        "goToCard": "Go to card {index}"
+      }
+    },
+    "testimonials": {
+      "badge": "What they say",
+      "title": "What our clients say about us",
+      "buttons": {
+        "seeAll": "See all reviews",
+        "previous": "Previous",
+        "next": "Next"
+      },
+      "navigation": {
+        "goToTestimonial": "Go to testimonial {index}"
+      },
+      "items": [
+        {
+          "name": "Sophie Margaret",
+          "country": "France",
+          "title": "An unforgettable trip thanks to Madabest!",
+          "content": "My husband and I discovered Madagascar in a unique way. The Madabest team created a tailor-made tour perfectly adapted to our wishes: between nature excursions, cultural moments and paradise beaches, everything was perfectly organized. The guides were passionate, always available, and made us feel like friends rather than just travelers. A big thank you to the whole team for their professionalism and human warmth. We leave with extraordinary memories and the desire to return!"
+        },
+        {
+          "name": "Jean Luc",
+          "country": "Spain",
+          "title": "An authentic and perfectly organized experience",
+          "content": "I chose Madabest for my trip to Madagascar, and it was an incredible experience. The team took care of everything: from hotel choices to excursions, including car rentals, every detail was carefully prepared. I particularly appreciated the kindness of the guides and their knowledge of the country, which allowed me to discover places off the beaten path. I highly recommend Madabest to anyone who wants to explore Madagascar differently, with professional and warm service."
+        }
+      ]
+    },
+    "video": {
+      "title": "THE BEST EXCURSIONS",
+      "subtitle": "Choose your pleasure vacation",
+      "description": "Nosy Be, nicknamed \"the island of perfumes\", is one of the most popular destinations in Madagascar. Between its white sandy beaches lined with coconut trees, its turquoise waters ideal for diving and snorkeling, and its volcanic landscapes dotted with sacred lakes, the island offers unique diversity. You can discover small neighboring islands like Nosy Komba or Nosy Tanikely, admire unforgettable sunsets on Andilana beach, or stroll through the colorful markets of Hell-Ville."
+    },
+    "partners": {
+      "official": "Our Official Partners",
+      "institutional": "Our Institutional Agreements",
+      "airlines": "Our Airline Partners",
+      "professional": "Professional Affiliation Awards"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "About us",
+      "activities": {
+        "trekking": "Trekking",
+        "birdwatching": "Birdwatching",
+        "wildlife": "Wildlife visit",
+        "community": "Community visit",
+        "packages": "Tour packages",
+        "custom": "Your personalized visit"
+      }
+    },
+    "intro": {
+      "button": "GET TO KNOW US",
+      "description": "Madabest is a Destination Management Company and inbound travel agency in Madagascar. We create tailor-made and experiential trips, sharing our passion for the Big Island."
+    },
+    "accordions": {
+      "whoWeAre": {
+        "title": "Who are we?",
+        "content": "Madabest is a tour operator and inbound agency in Diego Suarez Madagascar specialized in tailor-made travel and fun tours such as wildlife, seaside and sports stays. Our creative, warm and passionate team is experienced, forged by learning from each service accomplished over the years. Let our experienced and creative team take care of everything. We are always available to organize your vacation, let us know your specific needs, your means and your time."
+      },
+      "whyChoose": {
+        "title": "Why choose MADABEST?",
+        "points": [
+          "Listening & personalized preparation",
+          "Clear organization and support",
+          "Flexible, tailor-made and adapted services"
+        ]
+      },
+      "team": {
+        "title": "Our team within MADABEST",
+        "members": [
+          { "name": "Mrs. Cynthia", "role": "MADABEST MANAGER" },
+          { "name": "Paul", "role": "LOGISTICS MANAGER" },
+          { "name": "Jean-Luc", "role": "MADABEST PRODUCT MANAGER" },
+          { "name": "Malice", "role": "MADABEST MANAGER" },
+          { "name": "Maule", "role": "MADABEST CONSULTANT" },
+          { "name": "Jordan", "role": "MADABEST DRIVER" },
+          { "name": "Nico", "role": "MADABEST DRIVER" }
+        ]
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact us",
+    "subtitle": "Any questions or comments? Simply write us a message!",
+    "info": {
+      "heading": "Contact Information",
+      "cta": "Say something to start a live chat!",
+      "phone": "+261 34 28 325 14 /+261 32 05 127 11",
+      "email": {
+        "primary": "madabesrtip@gmail.com",
+        "secondary": "contact@madabestour.com"
+      },
+      "address": "43 Rue de la marne – Diego Suarez"
+    },
+    "form": {
+      "success": "Your message has been sent successfully!",
+      "labels": {
+        "firstname": "First name",
+        "lastname": "Last name",
+        "email": "Email",
+        "phone": "Phone number",
+        "subject": "Select a subject",
+        "message": "Message"
+      },
+      "placeholders": {
+        "firstname": "Smith",
+        "lastname": "John",
+        "email": "example@email.com",
+        "phone": "+261 34 01 123 45",
+        "message": "Leave us a message..."
+      },
+      "subjects": {
+        "circuits": "Information on tours and activities",
+        "reservations": "Reservations and accommodation",
+        "conseils": "Practical advice and travel assistance",
+        "autre": "Other"
+      },
+      "buttons": {
+        "submit": "Start your reservation",
+        "submitting": "Sending..."
+      }
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "subtitle": "Log in to your Madabest account"
+    },
+    "register": {
+      "title": "Sign up",
+      "subtitle": "Create your Madabest account"
+    }
+  },
+  "dashboard": {
+    "settings": {
+      "title": "Settings",
+      "subtitle": "Configure your application"
+    },
+    "users": {
+      "title": "User management",
+      "subtitle": "Manage application users"
+    }
+  },
+  "payment": {
+    "back": "Back",
+    "method": {
+      "title": "Payment method",
+      "lead": "Make your payment easily with the payment method of your choice"
+    },
+    "start": "Start your reservation",
+    "card": {
+      "title": "Card payment",
+      "details": "Card details",
+      "number": "Card number",
+      "expiration": "Expiration",
+      "cvc": "CVC",
+      "country": "Country"
+    },
+    "payNow": "Pay now",
+    "step": {
+      "informations": "Information",
+      "payment": "Payment",
+      "confirmation": "Confirmation"
+    },
+    "reservation": {
+      "infos": "Reservation information",
+      "place": "Location",
+      "date": "Date",
+      "persons": "Number of people",
+      "duration": "Duration"
+    },
+    "summary": {
+      "title": "Payment summary",
+      "unitPrice": "Unit price (per person)",
+      "carRental": "Car rental (per day)",
+      "paid": "Amount paid",
+      "due": "Amount due"
+    },
+    "form": {
+      "contactInfo": "Contact & Information",
+      "lastname": "Last name",
+      "firstname": "First name",
+      "email": "Email",
+      "phone": "Contact",
+      "countryResidence": "Country of residence",
+      "city": "City",
+      "address": "Address",
+      "termsLabel": "I have read and accept the",
+      "termsLink": "terms and conditions",
+      "cancel": "Cancel reservation",
+      "continue": "Continue",
+      "placeholders": {
+        "firstname": "Enter your first name",
+        "city": "e.g.: 75009 Paris",
+        "address": "e.g.: 12 Rue Lafayette, 75009 Paris"
+      },
+      "countries": {
+        "france": "France",
+        "madagascar": "Madagascar",
+        "usa": "United States"
+      }
+    },
+    "processing": {
+      "wait": "Please wait a moment while verifying",
+      "doNotClose": "Do not close this window until confirmation!"
+    },
+    "confirmed": {
+      "title": "Your reservation has been successfully completed!",
+      "emailHint": "Check your email inbox to find the complete summary of your reservation.",
+      "spamHint": "(If you don't see it, check your spam or junk mail)",
+      "backHome": "Back to home"
+    }
+  },
+  "services": {
+    "hero": {
+      "title": "Our services"
+    },
+    "badge": {
+      "experience": "10 years of experience in tourist services",
+      "protection": "Protection of natural reserves",
+      "satisfaction": "Customer satisfaction: vacationers, researchers, tourists"
+    },
+    "cards": {
+      "hiking": "Hiking and outdoor excursions",
+      "kayak": "Kayaks during your travel stay",
+      "cruise": "Boat cruise",
+      "wildlife": "Wildlife explorations"
+    },
+    "locations": {
+      "nosybe": "Nosy-Be",
+      "diegosuarez": "Diego-Suarez",
+      "antsohihy": "Antsohihy",
+      "ambanja": "Ambanja"
+    },
+    "adventures": {
+      "title": "Unforgettable adventures",
+      "text": "At Madabest, we combine respect for nature, cultural openness and a sense of sharing to create tailor-made trips. Our mission is to offer each traveler a unique, authentic and serene experience."
+    },
+    "process": {
+      "badge": "What we do",
+      "exchange": "Exchange & Preparation",
+      "exchangeDesc": "Personalized itinerary, adapted reservations and tailor-made activities.",
+      "organization": "Organization & Support",
+      "organizationDesc": "Transfers, guides, drivers and tickets booked for a serene trip.",
+      "privileges": "Your Privileges",
+      "privilegesDesc": "Immersion between wild nature and authentic human encounters.",
+      "groupImportance": "Importance of the Group",
+      "groupImportanceDesc": "Conviviality, security and contribution to local development.",
+      "toKnow": "To know",
+      "toKnowDesc": "Insurance, personal expenses and services outside the program not included."
+    },
+    "buttons": {
+      "contact": "Contact us",
+      "startReservation": "Start your reservation"
+    }
+  },
+  "terms": {
+    "title": {
+      "full": "General terms and conditions of reservation and cancellation"
+    },
+    "actions": {
+      "download": "Download terms in PDF",
+      "downloadAriaLabel": "Download terms in PDF",
+      "share": "Share terms",
+      "shareAriaLabel": "Share terms"
+    },
+    "buttons": {
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "sections": {
+      "reservation": {
+        "title": "Reservation & Commitment",
+        "description": "",
+        "sidebarText": "Reservation possible in office, by phone or email, confirmed by proforma invoice.",
+        "content": {
+          "intro": "**The reservation of a trip** or other services can be made at **our office**, **by phone** or always **confirmed by email**. Necessary and sufficient communications for listening and detailed understanding of each step, the itinerary and the course of your trip, as well as accommodations according to the chosen means and times, are essential. A proforma invoice will be sent to you upon confirmation of the service.",
+          "videoLabel": "Watch video",
+          "engagement": "The commitment only takes effect upon receipt of the requested deposit.",
+          "address": "43 Rue de la marne – Diego Suarez",
+          "phone": "+261 34 28 325 14 / +261 32 05 127 11",
+          "email": "madabesttrip@gmail.com / contact@madabesttour.com"
+        }
+      },
+      "assurance": {
+        "title": "Insurance",
+        "description": "",
+        "sidebarText": "Liability insurance included, additional travel insurance at your expense.",
+        "content": {
+          "description": "Our Madabest agency has taken out professional liability insurance with **NY HAVANA** company, covering risks related to the exercise of our activities. However, this coverage does not include medical evacuations, assistance insurance, cancellation or comprehensive travel insurance. We strongly recommend that each traveler takes out an appropriate insurance policy (medical assistance, repatriation, baggage loss, cancellation, etc.) with their usual insurer in order to travel with complete peace of mind.",
+          "contactTitle": "NY HAVANA Contact:",
+          "contactName": "NY HAVANA - ANTANANARIVO",
+          "contactPhone": "+261 34 82 523 41",
+          "contactEmail": "nyhavana@gmail.com"
+        }
+      },
+      "prix": {
+        "title": "Price",
+        "description": "For invoice payments in Ariary, the rate will be calculated based on the euro exchange rate on the day the payment is made. The validity of the rates announced in the price reference or on our website is for the current year. In general, we mention the details of expenses included in the price. Tips and drinks are not included in the prices. Discounts on certain services are available for children under 10 years old.",
+        "sidebarText": "Rates may be revised upwards or downwards if major external changes to our entity occur, such as:.",
+        "content": {
+          "revisionIntro": "Rates may be revised upwards or downwards if major external changes to our entity occur, such as:",
+          "reason1": "Increase in fuel prices",
+          "reason2": "Variation in exchange rates etc",
+          "reason3": "Change in rates of specific service providers.",
+          "notice": "In case changes occur, these modifications are communicated at least one month before the scheduled departure date."
+        }
+      },
+      "reglement": {
+        "title": "Payment",
+        "description": "",
+        "sidebarText": "A 20% deposit at booking, balance to be paid 30 days before departure.",
+        "content": {
+          "deposit": "A deposit of 20% of the service is requested to initiate the commitment and preparation of the trip/service. The balance is ideally payable 30 days before the start date of the trip or departure.",
+          "balance": "and the preparation of the trip/service. The balance is ideally payable **30 days before the start date of the trip or departure**. We cannot guarantee the realization of the client's trip before the service payment is complete. **Payment can be made in Euro or Ariary by bank transfer**. It goes without saying that the fees related to the transfer will be borne by the client. A confirmation email from the client of the transfer or payment with a copy of the transfer order is requested. The account and bank number are communicated to you upon request."
+        }
+      },
+      "annulation": {
+        "title": "Cancellation",
+        "description": "In case of cancellation, we ask the client according to the following cases:",
+        "sidebarText": "Variable fees depending on the cancellation date, up to 100% 7 days before departure.",
+        "content": {
+          "fee20Days": "20 days before departure:",
+          "fee20DaysValue": "30% of the total trip price",
+          "fee15Days": "15 days before the scheduled departure date:",
+          "fee15DaysValue": "50% of the total trip price",
+          "fee10Days": "10 days before departure:",
+          "fee10DaysValue": "75% of the total trip price",
+          "fee7Days": "7 days before departure:",
+          "fee7DaysValue": "100% of the total trip price",
+          "agencyCancellation": "Our agency, Madabest, reserves the right to cancel or modify a trip, **one month (30 days)** before the departure date in cases where:",
+          "reason1": "The balance of the invoice payment has not been made in a timely manner",
+          "reason2": "Major external problems, possible changes in air transport, and climatic conditions etc. arise."
+        }
+      }
+    }
+  }
+}

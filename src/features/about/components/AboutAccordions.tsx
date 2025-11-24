@@ -6,18 +6,22 @@ import {
   AccordionTrigger,
 } from "@/features/design-system/components/ui/accordion";
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export function AboutAccordions() {
-  const teamMembers = [
-    { name: "Mme Cynthia", role: "GÉRANTE MADABEST", photo: "/squad/cynthia.jpg" },
-    { name: "Paul", role: "RESPONSABLE LOGISTIQUE", photo: "/squad/paul.jpg" },
-    { name: "Jean-Luc", role: "RESPONSABLE PRODUIT MADABEST", photo: "/squad/luc.jpg" },
-    { name: "Malice", role: "MANAGEUR MADABEST", photo: "/squad/malice.jpg" },
-    { name: "Maule", role: "CONSULTANTE MADABEST", photo: "/squad/maule.jpg" },
-    { name: "Jordan", role: "CHAUFFEUR MADABEST", photo: "/squad/jordan.jpg" },
-    { name: "Nico", role: "CHAUFFEUR MADABEST", photo: "/squad/nico.jpg" },
+  const t = useTranslations("about.accordions");
+  const teamMembers = t.raw("team.members") as Array<{ name: string; role: string }>;
+
+  const teamMembersWithPhotos = [
+    { ...teamMembers[0], photo: "/squad/cynthia.jpg" },
+    { ...teamMembers[1], photo: "/squad/paul.jpg" },
+    { ...teamMembers[2], photo: "/squad/luc.jpg" },
+    { ...teamMembers[3], photo: "/squad/malice.jpg" },
+    { ...teamMembers[4], photo: "/squad/maule.jpg" },
+    { ...teamMembers[5], photo: "/squad/jordan.jpg" },
+    { ...teamMembers[6], photo: "/squad/nico.jpg" },
   ];
 
   // Respect user reduced motion preference
@@ -62,7 +66,7 @@ export function AboutAccordions() {
       <Accordion type="single" collapsible className="grid gap-4">
         <AccordionItem value="qui" className="rounded-2xl bg-[#EFEFEF] px-6">
           <AccordionTrigger className="flex items-center justify-between text-left text-3xl leading-[69px] font-medium text-[#0D0D0D]">
-            <span>Qui sommes nous ?</span>
+            <span>{t("whoWeAre.title")}</span>
           </AccordionTrigger>
           <AccordionContent>
             <AnimatePresence initial={false}>
@@ -74,13 +78,7 @@ export function AboutAccordions() {
                 exit={reduceMotion ? undefined : "collapsed"}
                 variants={contentVariants}
               >
-                Madabest, est un voyagiste et agence réceptive à Diego Suarez Madagascar spécialisé
-                dans le voyage sur mesure et les circuits ludiques tels que les séjours animaliers,
-                balnéaires et sportifs. Notre équipe créative, chaleureuse et passionnée est
-                expérimentée, forgée en apprenant de chaque service accompli depuis quelques années.
-                Laissez notre équipe expérimentée et créative s’occuper de tout. Nous sommes
-                toujours disponibles pour organiser vos vacances, faites-nous part de vos besoins
-                spécifiques, de vos moyens et de votre temps.
+                {t("whoWeAre.content")}
               </motion.div>
             </AnimatePresence>
           </AccordionContent>
@@ -88,7 +86,7 @@ export function AboutAccordions() {
 
         <AccordionItem value="pourquoi" className="rounded-2xl bg-[#EFEFEF] px-6">
           <AccordionTrigger className="flex items-center justify-between text-left text-3xl leading-[69px] font-medium text-[#0D0D0D]">
-            <span>Pourquoi choisir MADABEST ?</span>
+            <span>{t("whyChoose.title")}</span>
           </AccordionTrigger>
           <AccordionContent>
             <AnimatePresence initial={false}>
@@ -120,7 +118,7 @@ export function AboutAccordions() {
                       fill="#E2531F"
                     />
                   </svg>
-                  <span>Écoute & préparation personnalisée</span>
+                  <span>{t("whyChoose.points.0")}</span>
                 </motion.li>
                 <motion.li
                   className="flex items-start gap-5"
@@ -157,7 +155,7 @@ export function AboutAccordions() {
                       </clipPath>
                     </defs>
                   </svg>
-                  <span>Organisation et support clairs</span>
+                  <span>{t("whyChoose.points.1")}</span>
                 </motion.li>
                 <motion.li
                   className="flex items-start gap-2"
@@ -190,7 +188,7 @@ export function AboutAccordions() {
                       fill="#E2531F"
                     />
                   </svg>
-                  <span>Services flexibles, sur mesure et adaptés</span>
+                  <span>{t("whyChoose.points.2")}</span>
                 </motion.li>
               </motion.ul>
             </AnimatePresence>
@@ -199,7 +197,7 @@ export function AboutAccordions() {
 
         <AccordionItem value="equipe" className="rounded-2xl bg-[#EFEFEF] px-6">
           <AccordionTrigger className="flex items-center justify-between text-left text-3xl leading-[69px] font-medium text-[#0D0D0D]">
-            <span>Notre équipe au sein de MADABEST</span>
+            <span>{t("team.title")}</span>
           </AccordionTrigger>
           <AccordionContent>
             <AnimatePresence initial={false}>
@@ -211,7 +209,7 @@ export function AboutAccordions() {
                 exit={reduceMotion ? undefined : "collapsed"}
                 variants={contentVariants}
               >
-                {teamMembers.map((m, i) => (
+                {teamMembersWithPhotos.map((m, i) => (
                   <motion.div
                     key={m.name}
                     className="flex flex-col items-center rounded-lg p-4"

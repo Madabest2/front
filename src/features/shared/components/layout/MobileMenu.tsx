@@ -7,9 +7,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/features/design-system/components/ui/sheet";
+import { Link } from "@/i18n/navigation";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Menu, Search } from "lucide-react";
-import Link from "next/link";
 
 interface NavLink {
   label: string;

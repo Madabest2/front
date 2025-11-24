@@ -11,6 +11,7 @@ import {
   SelectValue,
 } from "@/features/design-system/components/ui/select";
 import { useDestinationSearch } from "@/features/shared/hooks/useDestinationSearch";
+import { Link } from "@/i18n/navigation";
 import {
   Bookmark,
   ChevronDown,
@@ -20,8 +21,8 @@ import {
   MapPin,
   Search,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const tours = [
@@ -56,6 +57,7 @@ const tours = [
 ];
 
 export function ToursSection() {
+  const t = useTranslations("home.tours");
   // Hook for text search across destination & title
   const {
     query: searchQuery,
@@ -104,12 +106,8 @@ export function ToursSection() {
         <div className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           {/* Title */}
           <div className="space-y-4">
-            <h2 className="text-[48px] leading-[69px] font-medium text-white">
-              Nos Forfaits Tours
-            </h2>
-            <p className="text-[16px] leading-[23px] font-medium text-white">
-              Découvrez votre destination de rêve ici
-            </p>
+            <h2 className="text-[48px] leading-[69px] font-medium text-white">{t("title")}</h2>
+            <p className="text-[16px] leading-[23px] font-medium text-white">{t("subtitle")}</p>
           </div>
 
           {/* Search and Filter */}
@@ -119,7 +117,7 @@ export function ToursSection() {
               <Search className="absolute top-1/2 left-4 h-6 w-6 -translate-y-1/2 transform text-white" />
               <Input
                 type="text"
-                placeholder="Recherchez votre prochaine destination..."
+                placeholder={t("search.placeholder")}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="h-11 rounded-xl border-none bg-[rgba(255,255,255,0.14)] py-6 pr-4 pl-12 text-[16px] leading-[23px] font-medium text-white backdrop-blur-md placeholder:text-white/70 focus:bg-white/20"
@@ -132,17 +130,17 @@ export function ToursSection() {
                 <div className="flex w-full items-center gap-3">
                   <MapPin className="h-[27px] w-[27px] shrink-0 text-[#E2531F]" />
                   <SelectValue
-                    placeholder="Où allez-vous ?"
+                    placeholder={t("search.locationPlaceholder")}
                     className="text-[16px] leading-[23px] font-medium"
                   />
                   <ChevronDown className="ml-auto h-4 w-4 shrink-0 text-[#E2531F]" />
                 </div>
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="nosy-be">Nosy-Be</SelectItem>
-                <SelectItem value="antsohihy">Antsohihy</SelectItem>
-                <SelectItem value="diego-suarez">Diego-Suarez</SelectItem>
-                <SelectItem value="ambanja">Ambanja</SelectItem>
+                <SelectItem value="nosy-be">{t("destinations.nosybe")}</SelectItem>
+                <SelectItem value="antsohihy">{t("destinations.antsohihy")}</SelectItem>
+                <SelectItem value="diego-suarez">{t("destinations.diegosuarez")}</SelectItem>
+                <SelectItem value="ambanja">{t("destinations.ambanja")}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -154,7 +152,7 @@ export function ToursSection() {
           size="lg"
           className="mb-12 h-[38px] cursor-pointer rounded border border-white/30 bg-white/90 px-[15px] text-[16px] leading-[23px] font-medium text-black transition-colors hover:bg-[#E2531F] hover:text-white focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:outline-none"
         >
-          Voir toutes les destinations
+          {t("buttons.seeAll")}
         </Button>
 
         {/* Mobile Carousel */}
@@ -167,14 +165,14 @@ export function ToursSection() {
                   <button
                     onClick={prev}
                     className="flex h-10 w-10 items-center justify-center rounded-full bg-white/90 shadow active:scale-95"
-                    aria-label="Précédent"
+                    aria-label={t("navigation.previous")}
                   >
                     <ChevronLeft className="h-5 w-5 text-black" />
                   </button>
                   <button
                     onClick={next}
                     className="flex h-10 w-10 items-center justify-center rounded-full bg-white/90 shadow active:scale-95"
-                    aria-label="Suivant"
+                    aria-label={t("navigation.next")}
                   >
                     <ChevronRight className="h-5 w-5 text-black" />
                   </button>
@@ -211,7 +209,7 @@ export function ToursSection() {
         </div>
         {visibleTours.length === 0 && (
           <p className="mt-8 hidden text-center text-white/80 md:block">
-            Aucune destination trouvée
+            {t("messages.noDestinations")}
           </p>
         )}
         {/* Desktop navigation arrow (optional) */}
@@ -219,7 +217,7 @@ export function ToursSection() {
           <button
             onClick={next}
             className="flex h-[53px] w-[53px] items-center justify-center rounded-full bg-white shadow-[-3px_4px_4px_rgba(0,0,0,0.25)] transition-transform hover:scale-110"
-            aria-label="Suivant"
+            aria-label={t("navigation.next")}
           >
             <ChevronRight className="h-6 w-6 text-black" />
           </button>
@@ -230,6 +228,7 @@ export function ToursSection() {
 }
 
 function TourCard({ tour }: { tour: (typeof tours)[0] }) {
+  const t = useTranslations("home.tours");
   return (
     <Card className="group relative h-auto w-full cursor-pointer overflow-hidden rounded-[15px] border border-white bg-[rgba(255,255,255,0.2)] backdrop-blur-xs transition-all duration-300 hover:scale-105 hover:bg-white/30">
       {/* Image - Height: 235px */}
@@ -254,7 +253,7 @@ function TourCard({ tour }: { tour: (typeof tours)[0] }) {
           <h3 className="text-[24px] leading-[35px] font-medium text-white">{tour.destination}</h3>
         </div>
         {/* Title */}
-        <p className="text-[15px] leading-[22px] font-medium text-[#E4E4E4]">{tour.title}</p>
+        <p className="text-[15px] leading-[22px] font-medium text-[#E4E4E4]">{t("tourTitle")}</p>
 
         {/* Price */}
         <div className="flex items-center gap-2">
@@ -271,7 +270,7 @@ function TourCard({ tour }: { tour: (typeof tours)[0] }) {
           className="w-full gap-2 rounded bg-[#E2531F] px-[15px] py-1.5 text-[16px] leading-[23px] font-medium text-white hover:bg-[#d64a2e]"
         >
           <Link href="/payment" className="flex items-center justify-center gap-2">
-            Réserver
+            {t("buttons.book")}
             <Image
               src={`/ticket.png`}
               alt={"ticket"}

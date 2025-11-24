@@ -14,22 +14,43 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
 } from "@/features/design-system/components/ui/select";
+import { Link, usePathname } from "@/i18n/navigation";
 import { Search } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { MobileMenu } from "./MobileMenu";
+
+// Inline SVG flag components to replace emoji flags (better rendering & styling control)
+const FlagFR = () => (
+  <svg width="24" height="16" viewBox="0 0 24 16" aria-hidden="true" className="shrink-0">
+    <rect width="24" height="16" fill="#FFFFFF" />
+    <rect width="8" height="16" x="0" fill="#0055A4" />
+    <rect width="8" height="16" x="16" fill="#EF4135" />
+  </svg>
+);
+
+const FlagEN = () => (
+  <svg width="24" height="16" viewBox="0 0 24 16" aria-hidden="true" className="shrink-0">
+    <rect width="24" height="16" fill="#012169" />
+    <path d="M0 0 L24 16 M24 0 L0 16" stroke="#FFFFFF" strokeWidth="3" />
+    <path d="M0 0 L24 16 M24 0 L0 16" stroke="#C8102E" strokeWidth="1.5" />
+    <rect x="10" width="4" height="16" fill="#FFFFFF" />
+    <rect y="6" width="24" height="4" fill="#FFFFFF" />
+    <rect x="11" width="2" height="16" fill="#C8102E" />
+    <rect y="7" width="24" height="2" fill="#C8102E" />
+  </svg>
+);
 
 interface HeaderProps {
   /** Tailwind text color utility e.g. 'text-white' | 'text-black'. If omitted, auto-selects based on route */
   textColorClass?: string;
 }
 export function Header({ textColorClass }: HeaderProps) {
+  const t = useTranslations("common");
+  const locale = useLocale();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [lang, setLang] = useState("fr");
   const pathname = usePathname();
   const lineRef = useRef<HTMLDivElement | null>(null);
   const activeLinkRef = useRef<HTMLAnchorElement | null>(null);
@@ -37,6 +58,11 @@ export function Header({ textColorClass }: HeaderProps) {
     left: 0,
     width: 0,
   });
+  const handleLanguageChange = (newLocale: string) => {
+    // Force a full page reload with the new locale to ensure all translations update
+    const currentPath = pathname;
+    window.location.href = `/${newLocale}${currentPath}`;
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,12 +96,12 @@ export function Header({ textColorClass }: HeaderProps) {
   }, [pathname]);
 
   const navLinks = [
-    { label: "Accueil", href: "/" },
-    { label: "À propos", href: "/about" },
-    { label: "Nos activités", href: "/activities" },
-    { label: "Nos services", href: "/services" },
-    { label: "Conditions & modalités", href: "/terms" },
-    { label: "Contact", href: "/contact" },
+    { label: t("navigation.home"), href: "/" },
+    { label: t("navigation.about"), href: "/about" },
+    { label: t("navigation.activities"), href: "/activities" },
+    { label: t("navigation.services"), href: "/services" },
+    { label: t("navigation.terms"), href: "/terms" },
+    { label: t("navigation.contact"), href: "/contact" },
   ];
 
   // Auto fallback: pages services, terms, contact => black text else white
@@ -100,7 +126,7 @@ export function Header({ textColorClass }: HeaderProps) {
         {/* Desktop Header */}
         <nav className="relative hidden h-[153px] w-full items-center lg:flex">
           {/* Logo légèrement plus à droite et aligné sur la ligne */}
-          <div className="absolute top-1/2 left-[3.5%] -translate-y-1/2 xl:left-[5.5%]">
+          <div className="absolute top-1/2 left-[3.5%] -translate-y-1/2 xl:left-[.5%]">
             <Link href="/" aria-label="Aller à l'accueil">
               <Image
                 src="/logo1.png"
@@ -138,18 +164,22 @@ export function Header({ textColorClass }: HeaderProps) {
                   >
                     {link.href === "/terms" ? (
                       <>
-                        <span className="hidden xl:inline">Conditions & modalités</span>
-                        <span className="xl:hidden">Conditions</span>
+                        <span className="hidden xl:inline">{t("navigation.terms")}</span>
+                        <span className="xl:hidden">{t("navigation.terms").split(" ")[0]}</span>
                       </>
                     ) : link.href === "/activities" ? (
                       <>
-                        <span className="hidden xl:inline">Nos activités</span>
-                        <span className="xl:hidden">Activités</span>
+                        <span className="hidden xl:inline">{t("navigation.activities")}</span>
+                        <span className="xl:hidden">
+                          {t("navigation.activities").split(" ")[1] || t("navigation.activities")}
+                        </span>
                       </>
                     ) : link.href === "/services" ? (
                       <>
-                        <span className="hidden xl:inline">Nos services</span>
-                        <span className="xl:hidden">Services</span>
+                        <span className="hidden xl:inline">{t("navigation.services")}</span>
+                        <span className="xl:hidden">
+                          {t("navigation.services").split(" ")[1] || t("navigation.services")}
+                        </span>
                       </>
                     ) : (
                       link.label
@@ -173,7 +203,7 @@ export function Header({ textColorClass }: HeaderProps) {
                 <Button
                   size="icon"
                   variant="ghost"
-                  aria-label={lang === "fr" ? "Rechercher" : "Search"}
+                  aria-label={t("search.open")}
                   className={`h-[42px] w-[42px] rounded-full border ${borderColor} bg-[rgba(31,121,188,0.15)] ${finalTextColor} backdrop-blur-[17px] hover:${isDark ? "bg-black/10" : "bg-white/10"}`}
                 >
                   <Search className="h-5 w-5" />
@@ -183,9 +213,7 @@ export function Header({ textColorClass }: HeaderProps) {
                 className={`max-w-xl ${isDark ? "border-black/20 bg-white/90" : "border-white/20 bg-black/80"} backdrop-blur-xl`}
               >
                 <DialogHeader>
-                  <DialogTitle className={finalTextColor}>
-                    {lang === "fr" ? "Rechercher une destination" : "Search a destination"}
-                  </DialogTitle>
+                  <DialogTitle className={finalTextColor}>{t("search.dialogTitle")}</DialogTitle>
                 </DialogHeader>
                 <div className="relative">
                   <Search
@@ -193,11 +221,7 @@ export function Header({ textColorClass }: HeaderProps) {
                   />
                   <Input
                     type="text"
-                    placeholder={
-                      lang === "fr"
-                        ? "Ex: Nosy-Be, Antsiranana..."
-                        : "e.g., Nosy-Be, Antsiranana..."
-                    }
+                    placeholder={t("search.placeholder")}
                     className={`w-full rounded-lg ${isDark ? "border-black/30 bg-black/5" : "border-white/30 bg-white/10"} py-3 pr-4 pl-12 ${finalTextColor} placeholder:${mutedText} focus:${isDark ? "border-black/50" : "border-white/50"}`}
                   />
                 </div>
@@ -208,34 +232,37 @@ export function Header({ textColorClass }: HeaderProps) {
           {/* CTA */}
           <div className="absolute top-[45.1%] left-[82%] -translate-y-1/2 xl:left-[74.58%]">
             <Button className="rounded bg-[#E2531F] py-1.5 leading-[22px] font-medium text-white hover:bg-[#d64a2e] lg:px-3 lg:text-sm xl:px-4 xl:text-[16px]">
-              {lang === "fr" ? (
-                <>
-                  <span className="hidden 2xl:inline">Commencer votre réservation</span>
-                  <span className="2xl:hidden">Réserver</span>
-                </>
-              ) : (
-                <>
-                  <span className="hidden 2xl:inline">Start your reservation</span>
-                  <span className="2xl:hidden">Book now</span>
-                </>
-              )}
+              <>
+                <span className="hidden 2xl:inline">{t("cta.startReservation.long")}</span>
+                <span className="2xl:hidden">{t("cta.startReservation.short")}</span>
+              </>
             </Button>
           </div>
 
           {/* Sélecteur de langue */}
           <div className="absolute top-[45.1%] left-[92.88%] -translate-y-1/2 lg:block">
-            <Select value={lang} onValueChange={setLang}>
+            <Select value={locale} onValueChange={handleLanguageChange}>
               <SelectTrigger
-                className={`h-[35px] items-center justify-center gap-2 rounded border-2 ${borderColor} bg-transparent px-2.5 ${finalTextColor} lg:w-11 xl:w-[72.63px]`}
+                className={`h-[35px] items-center justify-center gap-2 rounded border-2 ${borderColor} bg-transparent px-2.5 ${finalTextColor} lg:w-20 xl:w-[100px]`}
               >
-                <span className="lg:text-[18px] xl:text-[21px]">{lang === "fr" ? "🇫🇷" : "🇬🇧"}</span>
-                <SelectValue className="hidden xl:inline" placeholder="FR" />
+                <span className="flex items-center gap-2">
+                  {locale === "fr" ? <FlagFR /> : <FlagEN />}
+                  <span className="text-sm font-medium uppercase">{locale}</span>
+                </span>
               </SelectTrigger>
               <SelectContent
                 className={`${isDark ? "border-black/20 bg-white/95" : "border-white/20 bg-black/90"} ${finalTextColor}`}
               >
-                <SelectItem value="fr">🇫🇷 FR</SelectItem>
-                <SelectItem value="en">🇬🇧 EN</SelectItem>
+                <SelectItem value="fr">
+                  <div className="flex items-center gap-2">
+                    <FlagFR /> <span>FR</span>
+                  </div>
+                </SelectItem>
+                <SelectItem value="en">
+                  <div className="flex items-center gap-2">
+                    <FlagEN /> <span>EN</span>
+                  </div>
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>

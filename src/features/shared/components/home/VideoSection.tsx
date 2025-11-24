@@ -2,8 +2,12 @@
 
 import { Button } from "@/features/design-system/components/ui/button";
 import { Play } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export function VideoSection() {
+  const t = useTranslations("home.video");
+  const tCommon = useTranslations("common.cta");
+
   return (
     <section className="relative h-screen w-full overflow-hidden">
       {/* Background Image and Gradient */}
@@ -24,29 +28,19 @@ export function VideoSection() {
       <div className="relative z-10 mx-auto px-4 py-20 sm:px-6 lg:px-[68px] lg:py-32">
         <div className="max-w-[572px]">
           {/* Main Title */}
-          <h2 className="mb-8 text-[48px] leading-[69px] font-medium text-white">
-            LES MEILLEURES EXCURSIONS
-          </h2>
+          <h2 className="mb-8 text-[48px] leading-[69px] font-medium text-white">{t("title")}</h2>
 
           {/* Play Button with Text */}
           <div className="mb-8 flex items-center gap-4">
             <button className="group flex h-[61px] w-[61px] shrink-0 items-center justify-center rounded-full border-4 border-[#E2531F] bg-transparent transition-all duration-300 hover:bg-[#E2531F]">
               <Play className="ml-1 h-6 w-6 fill-[#E2531F] text-[#E2531F] group-hover:fill-white group-hover:text-white" />
             </button>
-            <h3 className="text-[32px] leading-[46px] font-bold text-white">
-              Choisissez vos vacances plaisir
-            </h3>
+            <h3 className="text-[32px] leading-[46px] font-bold text-white">{t("subtitle")}</h3>
           </div>
 
           {/* Description */}
           <p className="mb-8 text-[16px] leading-[27px] font-normal text-white">
-            Nosy Be, surnommée &quot;l&apos;île aux parfums&quot;, est l&apos;une des destinations
-            les plus prisées de Madagascar. Entre ses plages de sable blanc bordées de cocotiers,
-            ses eaux turquoise idéales pour la plongée et le snorkeling, et ses paysages volcaniques
-            parsemés de lacs sacrés, l&apos;île offre une diversité unique. Vous pourrez partir à la
-            découverte de petites îles voisines comme Nosy Komba ou Nosy Tanikely, admirer des
-            couchers de soleil inoubliables sur la plage d&apos;Andilana, ou encore flâner dans les
-            marchés colorés de Hell-Ville.
+            {t("description")}
           </p>
 
           {/* CTA Button */}
@@ -54,7 +48,7 @@ export function VideoSection() {
             size="lg"
             className="h-[38px] rounded bg-[#E2531F] px-[15px] text-[16px] leading-[23px] font-medium text-white hover:bg-[#d64a2e]"
           >
-            Commencer votre réservation
+            {tCommon("startReservation.long")}
           </Button>
         </div>
 

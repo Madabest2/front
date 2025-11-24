@@ -12,10 +12,12 @@ import {
   Phone,
   Twitter,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useContactForm } from "../hooks";
 import { contactSubjects } from "../types";
 
 export function ContactForm() {
+  const t = useTranslations("contact");
   const { form, onSubmit, isSubmitting, submitSuccess, submitError } = useContactForm();
   const {
     register,
@@ -30,11 +32,9 @@ export function ContactForm() {
       {/* Titre principal */}
       <div className="mb-12 text-center">
         <h1 className="mb-4 text-4xl font-medium text-[#0D0D0D] md:text-5xl lg:text-6xl">
-          Contacter nous
+          {t("title")}
         </h1>
-        <p className="mx-auto max-w-2xl text-lg text-[#0D0D0D] md:text-xl">
-          Des questions ou des remarques ? Écrivez-nous simplement un message !
-        </p>
+        <p className="mx-auto max-w-2xl text-lg text-[#0D0D0D] md:text-xl">{t("subtitle")}</p>
       </div>
 
       {/* Formulaire de contact (adapté à la maquette) */}
@@ -43,27 +43,25 @@ export function ContactForm() {
           {/* Panel orange mobile */}
           <div className="w-full rounded-t-[10px] bg-[#E2531F] p-6 text-white lg:hidden">
             <div className="space-y-2">
-              <h2 className="text-[24px] leading-9 font-semibold">Contact Information</h2>
-              <p className="text-[16px] leading-6 text-[#F3D9CF]">
-                Say something to start a live chat!
-              </p>
+              <h2 className="text-[24px] leading-9 font-semibold">{t("info.heading")}</h2>
+              <p className="text-[16px] leading-6 text-[#F3D9CF]">{t("info.cta")}</p>
             </div>
 
             <div className="mt-6 space-y-4 text-[16px] leading-6">
               <div className="flex items-center gap-3">
                 <Phone className="h-5 w-5" />
-                <span>+261 34 28 325 14 /+261 32 05 127 11</span>
+                <span>{t("info.phone")}</span>
               </div>
               <div className="flex items-start gap-3">
                 <Mail className="mt-1 h-5 w-5" />
                 <div>
-                  <div>madabesrtip@gmail.com /</div>
-                  <div>contact@madabestour.com</div>
+                  <div>{t("info.email.primary")} /</div>
+                  <div>{t("info.email.secondary")}</div>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <MapPin className="mt-1 h-5 w-5" />
-                <span>43 Rue de la marne – Diego Suarez</span>
+                <span>{t("info.address")}</span>
               </div>
             </div>
 
@@ -95,28 +93,26 @@ export function ContactForm() {
 
             {/* Contenu positionné */}
             <div className="absolute top-10 left-10 w-[291px]">
-              <h2 className="mb-2 text-[28px] leading-[42px] font-semibold">Contact Information</h2>
-              <p className="mb-10 text-[18px] leading-[27px] text-[#C9C9C9]">
-                Say something to start a live chat!
-              </p>
+              <h2 className="mb-2 text-[28px] leading-[42px] font-semibold">{t("info.heading")}</h2>
+              <p className="mb-10 text-[18px] leading-[27px] text-[#C9C9C9]">{t("info.cta")}</p>
             </div>
 
             {/* Groupe téléphone / email / adresse */}
             <div className="absolute top-[226px] left-[30px] space-y-6 text-[16px] leading-6">
               <div className="flex w-[321px] items-center gap-4">
                 <Phone className="h-6 w-6" />
-                <span>+261 34 28 325 14 /+261 32 05 127 11</span>
+                <span>{t("info.phone")}</span>
               </div>
               <div className="flex w-[279px] items-center gap-4">
                 <Mail className="h-6 w-6" />
                 <div>
-                  <div>madabesrtip@gmail.com /</div>
-                  <div>contact@madabestour.com</div>
+                  <div>{t("info.email.primary")} /</div>
+                  <div>{t("info.email.secondary")}</div>
                 </div>
               </div>
               <div className="flex w-[288px] items-start gap-4">
                 <MapPin className="mt-1 h-6 w-6" />
-                <span>43 Rue de la marne – Diego Suarez</span>
+                <span>{t("info.address")}</span>
               </div>
             </div>
 
@@ -147,7 +143,7 @@ export function ContactForm() {
               {/* Messages de retour */}
               {submitSuccess && (
                 <div className="rounded-lg border border-green-200 bg-green-50 p-4 text-green-800">
-                  Votre message a été envoyé avec succès !
+                  {t("form.success")}
                 </div>
               )}
 
@@ -161,7 +157,7 @@ export function ContactForm() {
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="firstName" className="text-[12px] font-medium text-[#8D8D8D]">
-                    Nom
+                    {t("form.labels.firstname")}
                   </Label>
                   <Input
                     id="firstName"
@@ -170,7 +166,7 @@ export function ContactForm() {
                       "rounded-lg border-0 border-b border-[#8D8D8D] text-[14px] placeholder:text-[#8D8D8D]",
                       errors.firstName && "border-red-500"
                     )}
-                    placeholder="Dupont"
+                    placeholder={t("form.placeholders.firstname")}
                   />
                   {errors.firstName && (
                     <p className="text-xs text-red-500">{errors.firstName.message}</p>
@@ -178,7 +174,7 @@ export function ContactForm() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="lastName" className="text-[12px] font-medium text-black">
-                    Prénom
+                    {t("form.labels.lastname")}
                   </Label>
                   <Input
                     id="lastName"
@@ -187,7 +183,7 @@ export function ContactForm() {
                       "border-0 border-b border-[#8D8D8D] text-[14px]",
                       errors.lastName && "border-red-500"
                     )}
-                    placeholder="Doe"
+                    placeholder={t("form.placeholders.lastname")}
                   />
                   {errors.lastName && (
                     <p className="text-xs text-red-500">{errors.lastName.message}</p>
@@ -199,7 +195,7 @@ export function ContactForm() {
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="email" className="text-[12px] font-medium text-[#8D8D8D]">
-                    Email
+                    {t("form.labels.email")}
                   </Label>
                   <Input
                     id="email"
@@ -209,14 +205,14 @@ export function ContactForm() {
                       "rounded-lg border-0 border-b border-[#8D8D8D] text-[14px] placeholder:text-[#8D8D8D]",
                       errors.email && "border-red-500"
                     )}
-                    placeholder="exemple@email.com"
+                    placeholder={t("form.placeholders.email")}
                   />
                   {errors.email && <p className="text-xs text-red-500">{errors.email.message}</p>}
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="phone" className="text-[12px] font-medium text-black">
-                    Numéro de téléphone
+                    {t("form.labels.phone")}
                   </Label>
                   <Input
                     id="phone"
@@ -225,7 +221,7 @@ export function ContactForm() {
                       "rounded-lg border-0 border-b border-black text-[14px] placeholder:text-[#8D8D8D]",
                       errors.phone && "border-red-500"
                     )}
-                    placeholder="+261 34 01 123 45"
+                    placeholder={t("form.placeholders.phone")}
                   />
                   {errors.phone && <p className="text-xs text-red-500">{errors.phone.message}</p>}
                 </div>
@@ -234,7 +230,7 @@ export function ContactForm() {
               {/* Sujet */}
               <div className="space-y-3">
                 <Label className="text-[14px] font-semibold text-black">
-                  Sélectionnez un sujet
+                  {t("form.labels.subject")}
                 </Label>
                 {/* Alignement horizontal des options, meilleure répartition tablette */}
                 <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
@@ -261,7 +257,9 @@ export function ContactForm() {
                           )}
                         </div>
                       </div>
-                      <span className="text-[12px] text-black">{subject.label}</span>
+                      <span className="text-[12px] text-black">
+                        {t(`form.subjects.${subject.value}`)}
+                      </span>
                     </label>
                   ))}
                 </div>
@@ -272,12 +270,12 @@ export function ContactForm() {
               {/* Message */}
               <div className="space-y-2">
                 <Label htmlFor="message" className="text-[12px] font-medium text-[#8D8D8D]">
-                  Message
+                  {t("form.labels.message")}
                 </Label>
                 <Textarea
                   id="message"
                   {...register("message")}
-                  placeholder="Laissez-nous un message..."
+                  placeholder={t("form.placeholders.message")}
                   rows={4}
                   className={cn(
                     "resize-none border-0 border-b border-[#8D8D8D] text-[14px] placeholder:text-[#8D8D8D]",
@@ -294,7 +292,7 @@ export function ContactForm() {
                   disabled={isSubmitting}
                   className="rounded-lg bg-[#E2531F] px-4 py-1.5 text-[16px] leading-[23px] font-medium text-white hover:bg-[#C84517]"
                 >
-                  {isSubmitting ? "Envoi en cours..." : "Commencer votre réservation"}
+                  {isSubmitting ? t("form.buttons.submitting") : t("form.buttons.submit")}
                 </Button>
               </div>
             </form>

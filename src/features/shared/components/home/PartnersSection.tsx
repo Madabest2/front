@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 const ALL_PARTNERS = [
@@ -17,6 +18,8 @@ const ALL_PARTNERS = [
   "PartenaireOfficiel-otm.svg",
   "PartenaireOfficiel-MadaDiego.svg",
   "PartenaireOfficiel-Nosybe.svg",
+  "Professional-CTM.svg",
+  "Professional-topmadagascar.svg",
 ];
 
 const OFFICIAL_OFFSETS: Record<string, string> = {
@@ -25,6 +28,7 @@ const OFFICIAL_OFFSETS: Record<string, string> = {
 const officials = ALL_PARTNERS.filter((file) => file.startsWith("PartenaireOfficiel-"));
 const institutional = ALL_PARTNERS.filter((file) => file.startsWith("Accord-"));
 const airlines = ALL_PARTNERS.filter((file) => file.startsWith("Air-"));
+const professional = ALL_PARTNERS.filter((file) => file.startsWith("Professional-"));
 
 function labelFromFilename(name: string) {
   return name
@@ -34,6 +38,8 @@ function labelFromFilename(name: string) {
 }
 
 export function PartnersSection() {
+  const t = useTranslations("home.partners");
+
   return (
     <section className="bg-[#FFF6E4] py-20 lg:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-[30px]">
@@ -42,7 +48,7 @@ export function PartnersSection() {
           {/* Nos Partenaires Officiels */}
           <div>
             <h2 className="mb-3 text-[48px] leading-[69px] font-medium text-black">
-              Nos Partenaires Officiels
+              {t("official")}
             </h2>
             <div className="grid w-full grid-cols-2 justify-items-start gap-2 md:grid-cols-4">
               {officials.map((file) => (
@@ -65,7 +71,7 @@ export function PartnersSection() {
           {/* Nos Accords Institutionnels */}
           <div>
             <h2 className="mb-8 text-[48px] leading-[69px] font-medium text-black">
-              Nos Accords Institutionnels
+              {t("institutional")}
             </h2>
             <div className="mx-auto inline-grid grid-cols-2 justify-items-start gap-4">
               {institutional.map((file) => (
@@ -89,7 +95,7 @@ export function PartnersSection() {
         {/* Nos Partenaires Aériens */}
         <div>
           <h2 className="mb-8 text-[48px] leading-[69px] font-medium text-black">
-            Nos Partenaires Aériens
+            {t("airlines")}
           </h2>
           <div className="mx-auto inline-grid grid-cols-2 justify-items-start gap-6 md:grid-cols-4">
             {airlines.map((file) => (
@@ -106,6 +112,29 @@ export function PartnersSection() {
                     className="h-50 w-auto max-w-full object-contain object-left"
                   />
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Professional Affiliation Awards */}
+        <div className="mt-16">
+          <h2 className="mb-8 text-[48px] leading-[69px] font-medium text-black">
+            {t("professional")}
+          </h2>
+          <div className="mx-auto inline-grid grid-cols-2 justify-items-start gap-6">
+            {professional.map((file) => (
+              <div
+                key={file}
+                className="flex h-[120px] w-full items-center justify-start overflow-hidden rounded-lg bg-transparent p-4 transition-shadow duration-300"
+              >
+                <Image
+                  src={`/partners/${file}`}
+                  alt={labelFromFilename(file)}
+                  width={250}
+                  height={50}
+                  className="h-25 w-auto max-w-full object-contain object-left"
+                />
               </div>
             ))}
           </div>

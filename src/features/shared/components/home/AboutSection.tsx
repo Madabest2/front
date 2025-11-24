@@ -1,32 +1,35 @@
 "use client";
 
 import { Button } from "@/features/design-system/components/ui/button";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 const services = [
   {
     id: "1",
-    title: "Excursions",
+    titleKey: "excursions",
     iconSrc: "/aventure/excursion.svg",
   },
   {
     id: "2",
-    title: "Circuits sur mesure",
+    titleKey: "customCircuits",
     iconSrc: "/aventure/map.svg",
   },
   {
     id: "3",
-    title: "Location de voiture",
+    titleKey: "carRental",
     iconSrc: "/aventure/car.svg",
   },
   {
     id: "4",
-    title: "Réservation d'hôtels",
+    titleKey: "hotelBooking",
     iconSrc: "/aventure/hotel.svg",
   },
 ];
 
 export function AboutSection() {
+  const t = useTranslations("home.about");
+  const tCommon = useTranslations("common.cta");
   return (
     <section className="relative bg-black py-16 lg:py-32">
       {/* White decoration - Position from Figma */}
@@ -47,18 +50,16 @@ export function AboutSection() {
             {/* About Text */}
             <div className="space-y-6">
               <p className="text-[20px] leading-[29px] text-white">
-                <strong>MADABEST</strong> est une Destination Management Company et une agence de
-                voyages spécialisée dans l&apos;organisation de circuits à Madagascar. Nous
-                proposons des voyages sur mesure et expérientiels, adaptés à vos envies. Passionnée
-                de découvertes et profondément attachée à Madagascar, notre équipe souhaite partager
-                cette passion avec vous et rendre votre voyage inoubliable.
+                {t.rich("description", {
+                  strong: (chunks) => <strong>{chunks}</strong>,
+                })}
               </p>
 
               <Button
                 variant="link"
                 className="h-auto p-0 text-[20px] leading-[29px] font-semibold text-[#E2531F] underline hover:text-[#d64a2e]"
               >
-                En savoir plus
+                {t("learnMore")}
               </Button>
             </div>
 
@@ -150,10 +151,10 @@ export function AboutSection() {
             {/* Title */}
             <div className="space-y-4">
               <h3 className="text-[40px] leading-[58px] font-(--font-kaushan-script) text-[#E2531F]">
-                Prêt à vivre l&apos;aventure ?
+                {t("adventure.title")}
               </h3>
               <h2 className="text-[20px] leading-[29px] font-semibold text-white">
-                Tout pour organiser votre séjour à Madagascar :
+                {t("adventure.subtitle")}
               </h2>
             </div>
 
@@ -165,7 +166,7 @@ export function AboutSection() {
                   <div className="flex h-[50px] w-[55px] shrink-0 items-center justify-center rounded-[5px] bg-[#E2531F]">
                     <Image
                       src={service.iconSrc}
-                      alt={service.title}
+                      alt={t(`services.${service.titleKey}`)}
                       width={32}
                       height={32}
                       className="h-8 w-8"
@@ -173,7 +174,7 @@ export function AboutSection() {
                   </div>
                   {/* Service Title */}
                   <h4 className="text-[16px] leading-[23px] font-semibold text-white">
-                    {service.title}
+                    {t(`services.${service.titleKey}`)}
                   </h4>
                 </div>
               ))}
@@ -184,7 +185,7 @@ export function AboutSection() {
               size="lg"
               className="h-[38px] rounded bg-[#E2531F] px-[15px] text-[16px] leading-[23px] font-medium text-white hover:bg-[#d64a2e]"
             >
-              Commencer votre réservation
+              {tCommon("startReservation.long")}
             </Button>
           </div>
         </div>

@@ -2,6 +2,7 @@
 
 import { Button } from "@/features/design-system/components/ui/button";
 import { Input } from "@/features/design-system/components/ui/input";
+import { Link } from "@/i18n/navigation";
 import {
   Copyright,
   Facebook,
@@ -13,8 +14,8 @@ import {
   Phone,
   Send,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
-import Link from "next/link";
 import type { SVGProps } from "react";
 import { useState } from "react";
 
@@ -41,24 +42,7 @@ const XLogo = (props: SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-const footerLinks = {
-  services: [
-    { label: "Location de véhicule", href: "/services/car-rental" },
-    { label: "Conditions des ventes", href: "/terms" },
-    { label: "Convictions", href: "/about/convictions" },
-    { label: "Notre Agence", href: "/about" },
-    { label: "Spécifiques tours", href: "/tours/specific" },
-    { label: "Trekking", href: "/tours/trekking" },
-  ],
-  navigation: [
-    { label: "Accueil", href: "/" },
-    { label: "Tailor made", href: "/tailor-made" },
-    { label: "Services", href: "/services" },
-    { label: "Excursions", href: "/excursions" },
-    { label: "Contact", href: "/contact" },
-  ],
-};
-
+// Brand X (Twitter) logo as a React component using currentColor
 const socialLinks = [
   { icon: Facebook, url: "#", label: "Facebook" },
   { icon: Instagram, url: "#", label: "Instagram" },
@@ -68,8 +52,27 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const t = useTranslations("common");
   const [email, setEmail] = useState("");
   const currentYear = new Date().getFullYear();
+
+  const footerLinks = {
+    services: [
+      { label: t("footer.links.vehicleRental"), href: "/services/vehicle-rental" },
+      { label: t("navigation.terms"), href: "/terms" },
+      { label: t("footer.links.convictions"), href: "/about/convictions" },
+      { label: t("navigation.about"), href: "/about" },
+      { label: t("footer.links.specificTours"), href: "/tours/specific" },
+      { label: t("footer.links.trekking"), href: "/tours/trekking" },
+    ],
+    navigation: [
+      { label: t("navigation.home"), href: "/" },
+      { label: t("footer.links.tailorMade"), href: "/tailor-made" },
+      { label: t("navigation.services"), href: "/services" },
+      { label: t("footer.links.excursions"), href: "/excursions" },
+      { label: t("navigation.contact"), href: "/contact" },
+    ],
+  };
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -138,11 +141,13 @@ export function Footer() {
 
           {/* Colonne droite - Newsletter */}
           <div className="space-y-6 lg:mt-20">
-            <h3 className="text-[24px] leading-[35px] font-bold text-black">Entrer en contact</h3>
+            <h3 className="text-[24px] leading-[35px] font-bold text-black">
+              {t("footer.contact.heading")}
+            </h3>
             <form onSubmit={handleSubscribe} className="relative">
               <Input
                 type="email"
-                placeholder="Entrer votre email"
+                placeholder={t("footer.enterEmail")}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="h-[60px] w-full rounded-lg border border-black px-4 pr-[180px] text-[16px] font-bold text-black placeholder:text-black/60"
@@ -151,7 +156,7 @@ export function Footer() {
                 type="submit"
                 className="absolute top-1/2 right-2 flex -translate-y-1/2 items-center gap-2 rounded-lg bg-[#E2531F] px-4 py-2 text-white hover:bg-[#d64a2e]"
               >
-                abonnez-vous
+                {t("footer.subscribe")}
                 <div className="flex h-[31px] w-[31px] items-center justify-center rounded-full bg-white">
                   <Send className="h-4 w-4 text-black" />
                 </div>
@@ -163,7 +168,9 @@ export function Footer() {
         {/* Row: Suivez-nous + Navigation on same line */}
         <div className="mt-4 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div className="flex flex-wrap items-center gap-4 sm:gap-6">
-            <h3 className="text-[24px] leading-[35px] font-bold text-black">Suivez-nous</h3>
+            <h3 className="text-[24px] leading-[35px] font-bold text-black">
+              {t("footer.followUs")}
+            </h3>
             {socialLinks.map((social, index) => (
               <a
                 key={index}
@@ -192,10 +199,12 @@ export function Footer() {
         <div className="mt-10 flex flex-col items-center justify-between border-t border-black pt-6 text-[16px] font-semibold text-black md:flex-row">
           <div className="flex items-center gap-2 underline">
             <Copyright className="h-5 w-5" />
-            <span>{currentYear} by LANTORIAN</span>
+            <span>
+              {currentYear} {t("footer.copyright")}
+            </span>
           </div>
           <Link href="/privacy" className="underline hover:text-[#E2531F]">
-            Politique de confidentialité
+            {t("footer.privacy")}
           </Link>
         </div>
       </div>
